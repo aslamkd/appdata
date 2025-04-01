@@ -66,8 +66,7 @@
                     ]
                   }
                 },
-                "Chapters": {
-                  "Chapter 2": {
+                 "Chapter 2": {
                     "name": "Numbers",
                     "videos": [
                       {
@@ -87,7 +86,7 @@
                       }
                     ]
                   }
-                }
+                
               }
             }
           },
