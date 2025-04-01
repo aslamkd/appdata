@@ -1,187 +1,166 @@
 {
-    "MainAppData": {
-      "Students": {
-        "Class VI": {
-          "9876543210": {
-            "name": "Student A",
-            "password": "password123",
-            "mobile_number": "9876543210",
-            "profile_image": "https://cdn-icons-png.flaticon.com/512/4537/4537019.png"
-          },
-          "8765432109": {
-            "name": "Student B",
-            "password": "password456",
-            "mobile_number": "8765432109",
-            "profile_image": "https://example.com/profile_student_b.jpg"
-          }
+  "MainAppData": {
+    "Students": {
+      "Class VI": {
+        "9876543210": {
+          "name": "Student A",
+          "password": "password123",
+          "mobile_number": "9876543210",
+          "profile_image": "https://cdn-icons-png.flaticon.com/512/4537/4537019.png"
         },
-        "Class VII": {
-          "7654321098": {
-            "name": "Student C",
-            "password": "password789",
-            "mobile_number": "7654321098",
-            "profile_image": "https://example.com/profile_student_c.jpg"
-          }
+        "8765432109": {
+          "name": "Student B",
+          "password": "password456",
+          "mobile_number": "8765432109",
+          "profile_image": "https://example.com/profile_student_b.jpg"
         }
       },
-      "Contents": {
-        "Class VI": {
-          "Videos": {
-            "Subjects": {
-              "Mathematics": {
-                "Chapters": {
-                  "Chapter 1": {
-                    "name": "Numbers",
-                    "videos": [
-                      {
-                        "video_id": "Ufjz7xudSUI",
-                        "video_title": "Introduction to Numbers",
-                        "length": "10:30"
-                      },
-                      {
-                        "video_id": "Ufjz7xudSUI",
-                        "video_title": "Operations on Numbers",
-                        "length": "12:45"
-                      },
-                      {
-                        "video_id": "Ufjz7xudSUI",
-                        "video_title": "Operations on Numbers",
-                        "length": "12:45"
-                      },
-                      {
-                        "video_id": "Ufjz7xudSUI",
-                        "video_title": "Operations on Numbers",
-                        "length": "12:45"
-                      },
-                      {
-                        "video_id": "Ufjz7xudSUI",
-                        "video_title": "Operations on Numbers",
-                        "length": "12:45"
-                      },
-                      {
-                        "video_id": "Ufjz7xudSUI",
-                        "video_title": "Operations on Numbers",
-                        "length": "12:45"
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "Mock Test": {
+      "Class VII": {
+        "7654321098": {
+          "name": "Student C",
+          "password": "password789",
+          "mobile_number": "7654321098",
+          "profile_image": "https://example.com/profile_student_c.jpg"
+        }
+      }
+    },
+    "Contents": {
+      "Class VI": {
+        "Videos": {
+          "Subjects": {
             "Mathematics": {
               "Chapters": {
                 "Chapter 1": {
                   "name": "Numbers",
-                  "mock_tests": [
+                  "videos": [
                     {
-                      "test_name": "Basic Numbers Test",
-                      "num_questions": 10
+                      "video_id": "Ufjz7xudSUI",
+                      "video_title": "Introduction to Numbers",
+                      "length": "10:30"
                     },
                     {
-                      "test_name": "Advanced Numbers Test",
-                      "num_questions": 15
+                      "video_id": "Ufjz7xudSUI",
+                      "video_title": "Operations on Numbers",
+                      "length": "12:45"
                     }
                   ]
                 }
               }
             }
-          },
-          "PYQ": {
-            "Mathematics": {
-              "Years": {
-                "2023": "https://example.com/mathematics_2023",
-                "2022": "https://example.com/mathematics_2022"
-              }
-            }
-          },
-          "Live Class": {
-            "2025-04-02": [
-              {
-                "title": "Live Mathematics Class - Algebra",
-                "uptime": "10:00 AM",
-                "link": "https://example.com/live_class_math_vi"
-              }
-            ]
-          },
-          "Doubt": {
-            "data_link": "https://example.com/doubt_class_vi"
-          },
-          "Notifications": {
-            "2025-04-01": [
-              {
-                "title": "New Study Material Added",
-                "link": "https://example.com/study_material_class_vi"
-              }
-            ]
           }
         },
-        "Class VII": {
-          "Videos": {
-            "Subjects": {
-              "Mathematics": {
-                "Chapters": {
-                  "Chapter 1": {
-                    "name": "Algebra",
-                    "videos": [
-                      {
-                        "video_id": "Ufjz7xudSUI",
-                        "video_title": "Introduction to Algebra",
-                        "length": "14:00"
-                      }
-                    ]
+        "Mock Test": {
+          "Mathematics": {
+            "Chapters": {
+              "Chapter 1": {
+                "name": "Numbers",
+                "mock_tests": [
+                  {
+                    "test_name": "Basic Numbers Test",
+                    "num_questions": 10
+                  },
+                  {
+                    "test_name": "Advanced Numbers Test",
+                    "num_questions": 15
                   }
-                }
+                ]
               }
             }
-          },
-          "Mock Test": {
+          }
+        },
+        "PYQ": {
+          "Mathematics": {
+            "Years": {
+              "2023": "https://example.com/mathematics_2023",
+              "2022": "https://example.com/mathematics_2022"
+            }
+          }
+        },
+        "Live Class": {
+          "2025-04-02": [
+            {
+              "title": "Live Mathematics Class - Algebra",
+              "uptime": "10:00 AM",
+              "link": "https://example.com/live_class_math_vi"
+            }
+          ]
+        },
+        "Doubt": {
+          "data_link": "https://example.com/doubt_class_vi"
+        },
+        "Notifications": {
+          "2025-04-01": [
+            {
+              "title": "New Study Material Added",
+              "link": "https://example.com/study_material_class_vi"
+            }
+          ]
+        }
+      },
+      "Class VII": {
+        "Videos": {
+          "Subjects": {
             "Mathematics": {
               "Chapters": {
                 "Chapter 1": {
                   "name": "Algebra",
-                  "mock_tests": [
+                  "videos": [
                     {
-                      "test_name": "Basic Algebra Test",
-                      "num_questions": 12
+                      "video_id": "Ufjz7xudSUI",
+                      "video_title": "Introduction to Algebra",
+                      "length": "14:00"
                     }
                   ]
                 }
               }
             }
-          },
-          "PYQ": {
-            "Mathematics": {
-              "Years": {
-                "2023": "https://example.com/mathematics_2023",
-                "2022": "https://example.com/mathematics_2022"
+          }
+        },
+        "Mock Test": {
+          "Mathematics": {
+            "Chapters": {
+              "Chapter 1": {
+                "name": "Algebra",
+                "mock_tests": [
+                  {
+                    "test_name": "Basic Algebra Test",
+                    "num_questions": 12
+                  }
+                ]
               }
             }
-          },
-          "Live Class": {
-            "2025-04-02": [
-              {
-                "title": "Live Science Class - Physics",
-                "uptime": "2:00 PM",
-                "link": "https://example.com/live_class_science_vii"
-              }
-            ]
-          },
-          "Doubt": {
-            "data_link": "https://example.com/doubt_class_vii"
-          },
-          "Notifications": {
-            "2025-04-01": [
-              {
-                "title": "Upcoming Mock Test Announcement",
-                "link": "https://example.com/mock_test_class_vii"
-              }
-            ]
           }
+        },
+        "PYQ": {
+          "Mathematics": {
+            "Years": {
+              "2023": "https://example.com/mathematics_2023",
+              "2022": "https://example.com/mathematics_2022"
+            }
+          }
+        },
+        "Live Class": {
+          "2025-04-02": [
+            {
+              "title": "Live Science Class - Physics",
+              "uptime": "2:00 PM",
+              "link": "https://example.com/live_class_science_vii"
+            }
+          ]
+        },
+        "Doubt": {
+          "data_link": "https://example.com/doubt_class_vii"
+        },
+        "Notifications": {
+          "2025-04-01": [
+            {
+              "title": "Upcoming Mock Test Announcement",
+              "link": "https://example.com/mock_test_class_vii"
+            }
+          ]
         }
-      },
-      "Config": {}
-    }
+      }
+    },
+    "Config": {}
   }
-  
+}
