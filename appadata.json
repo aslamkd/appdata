@@ -1,3 +1,4 @@
+
 {
     "MainAppData": {
         "Students": {
@@ -32,15 +33,26 @@
                                 "Chapter 2": {
                                     "name": "Algebra",
                                     "videos": [
-                                        { "video_id": "A1B2C3D4", "video_title": "Introduction to Algebra", "length": "14:00" },
-                                        { "video_id": "E5F6G7H8", "video_title": "Basic Algebraic Expressions", "length": "15:30" }
+                                        { "video_id": "abc123", "video_title": "Basics of Algebra", "length": "14:20" },
+                                        { "video_id": "def456", "video_title": "Algebraic Expressions", "length": "15:00" }
+                                    ]
+                                }
+                            }
+                        },
+                        "Science": {
+                            "Chapters": {
+                                "Chapter 1": {
+                                    "name": "Physics - Motion",
+                                    "videos": [
+                                        { "video_id": "xyz789", "video_title": "Introduction to Motion", "length": "11:50" },
+                                        { "video_id": "uvw101", "video_title": "Newton's Laws", "length": "13:30" }
                                     ]
                                 },
-                                "Chapter 3": {
-                                    "name": "Geometry",
+                                "Chapter 2": {
+                                    "name": "Biology - Cells",
                                     "videos": [
-                                        { "video_id": "I9J0K1L2", "video_title": "Introduction to Geometry", "length": "13:00" },
-                                        { "video_id": "M3N4O5P6", "video_title": "Triangles and Angles", "length": "16:45" }
+                                        { "video_id": "lmn112", "video_title": "Cell Structure", "length": "12:10" },
+                                        { "video_id": "pqr113", "video_title": "Cell Functions", "length": "14:15" }
                                     ]
                                 }
                             }
@@ -60,8 +72,19 @@
                             "Chapter 2": {
                                 "name": "Algebra",
                                 "mock_tests": [
-                                    { "test_name": "Basic Algebra Test", "num_questions": 12 },
-                                    { "test_name": "Advanced Algebra Test", "num_questions": 18 }
+                                    { "test_name": "Algebra Basics Test", "num_questions": 12 },
+                                    { "test_name": "Algebra Expressions Test", "num_questions": 18 }
+                                ]
+                            }
+                        }
+                    },
+                    "Science": {
+                        "Chapters": {
+                            "Chapter 1": {
+                                "name": "Physics - Motion",
+                                "mock_tests": [
+                                    { "test_name": "Motion Test", "num_questions": 10 },
+                                    { "test_name": "Newton's Laws Test", "num_questions": 15 }
                                 ]
                             }
                         }
@@ -73,11 +96,18 @@
                             "2023": "https://example.com/mathematics_2023",
                             "2022": "https://example.com/mathematics_2022"
                         }
+                    },
+                    "Science": {
+                        "Years": {
+                            "2023": "https://example.com/science_2023",
+                            "2022": "https://example.com/science_2022"
+                        }
                     }
                 },
                 "Live Class": {
                     "2025-04-02": [
-                        { "title": "Live Mathematics Class - Algebra", "uptime": "10:00 AM", "link": "https://example.com/live_class_math_vi" }
+                        { "title": "Live Mathematics Class - Algebra", "uptime": "10:00 AM", "link": "https://example.com/live_class_math_vi" },
+                        { "title": "Live Science Class - Physics", "uptime": "2:00 PM", "link": "https://example.com/live_class_science_vi" }
                     ]
                 },
                 "Doubt": {
@@ -85,7 +115,8 @@
                 },
                 "Notifications": {
                     "2025-04-01": [
-                        { "title": "New Study Material Added", "link": "https://example.com/study_material_class_vi" }
+                        { "title": "New Study Material Added", "link": "https://example.com/study_material_class_vi" },
+                        { "title": "Upcoming Science Mock Test", "link": "https://example.com/mock_test_science_vi" }
                     ]
                 }
             }
