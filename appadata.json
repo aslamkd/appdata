@@ -6,6 +6,7 @@
                 "9876543210": {
                     "name": "Student A",
                     "password": "password123",
+                    "StudentClass": "VI",
                     "mobile_number": "9876543210",
                     "profile_image": "https://cdn-icons-png.flaticon.com/512/4537/4537019.png"
                 },
