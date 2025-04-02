@@ -11,6 +11,7 @@
                 },
                 "8765432109": {
                     "name": "Student B",
+                    "StudentClass": "VI",
                     "password": "password456",
                     "mobile_number": "8765432109",
                     "profile_image": "https://example.com/profile_student_b.jpg"
