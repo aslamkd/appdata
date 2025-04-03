@@ -97,8 +97,7 @@
                   }
               },
               "PYQ": {
-    "Class VI": {
-      "Mathematics": [
+   "Mathematics": [
         {
           "School Name": "Example School VI",
           "Link": [
@@ -146,57 +145,6 @@
           "Exam": "2nd Summative"
         }
       ]
-    },
-    "Class VII": {
-      "Mathematics": [
-        {
-          "School Name": "Example School VII",
-          "Link": [
-            { "Page": "Page 1", "URL": "https://i.ytimg.com/vi/SMosegDZhpw/oar2.jpg" },
-            { "Page": "Page 2", "URL": "https://i.ytimg.com/vi/SMosegDZhpw/oar2.jpg" },
-            { "Page": "Page 3", "URL": "https://i.ytimg.com/vi/SMosegDZhpw/oar2.jpg" }
-          ],
-          "Year": "2023",
-          "Marks": 92,
-          "Exam": "3rd Summative"
-        },
-        {
-          "School Name": "Example School VII",
-          "Link": [
-            { "Page": "Page 1", "URL": "https://i.ytimg.com/vi/SMosegDZhpw/oar2.jpg" },
-            { "Page": "Page 2", "URL": "https://i.ytimg.com/vi/SMosegDZhpw/oar2.jpg" },
-            { "Page": "Page 3", "URL": "https://i.ytimg.com/vi/SMosegDZhpw/oar2.jpg" }
-          ],
-          "Year": "2022",
-          "Marks": 88,
-          "Exam": "1st Summative"
-        }
-      ],
-      "Science": [
-        {
-          "School Name": "Example School VI",
-          "Link": [
-            { "Page": "Page 1", "URL": "https://i.ytimg.com/vi/SMosegDZhpw/oar2.jpg" },
-            { "Page": "Page 2", "URL": "https://i.ytimg.com/vi/SMosegDZhpw/oar2.jpg" },
-            { "Page": "Page 3", "URL": "https://i.ytimg.com/vi/SMosegDZhpw/oar2.jpg" }
-          ],
-          "Year": "2022",
-          "Marks": 85,
-          "Exam": "2nd Summative"
-        },
-        {
-          "School Name": "Example School VII",
-          "Link": [
-           { "Page": "Page 1", "URL": "https://i.ytimg.com/vi/SMosegDZhpw/oar2.jpg" },
-            { "Page": "Page 2", "URL": "https://i.ytimg.com/vi/SMosegDZhpw/oar2.jpg" },
-            { "Page": "Page 3", "URL": "https://i.ytimg.com/vi/SMosegDZhpw/oar2.jpg" }
-          ],
-          "Year": "2022",
-          "Marks": 82,
-          "Exam": "2nd Summative"
-        }
-      ]
-    }
   },
               "Live Class": {
                   "2025-04-02": [
