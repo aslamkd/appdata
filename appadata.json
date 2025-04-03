@@ -101,14 +101,22 @@
       "Mathematics": [
         {
           "School Name": "Example School VI",
-          "Link": "https://example.com/mathematics_class_vi_1",
+          "Link": [
+            { "Page": "Page 1", "URL": "https://example.com/mathematics_class_vi_2?page=1" },
+            { "Page": "Page 2", "URL": "https://example.com/mathematics_class_vi_2?page=2" },
+            { "Page": "Page 3", "URL": "https://example.com/mathematics_class_vi_2?page=3" }
+          ],
           "Year": "2023",
           "Marks": 90,
           "Exam": "1st Summative"
         },
         {
           "School Name": "Example School VI",
-          "Link": "https://example.com/mathematics_class_vi_2",
+          "Link": [
+            { "Page": "Page 1", "URL": "https://example.com/mathematics_class_vi_2?page=1" },
+            { "Page": "Page 2", "URL": "https://example.com/mathematics_class_vi_2?page=2" },
+            { "Page": "Page 3", "URL": "https://example.com/mathematics_class_vi_2?page=3" }
+          ],
           "Year": "2022",
           "Marks": 85,
           "Exam": "2nd Summative"
@@ -117,14 +125,22 @@
       "Science": [
         {
           "School Name": "Example School VI",
-          "Link": "https://example.com/science_class_vi_1",
+          "Link": [
+            { "Page": "Page 1", "URL": "https://example.com/mathematics_class_vi_2?page=1" },
+            { "Page": "Page 2", "URL": "https://example.com/mathematics_class_vi_2?page=2" },
+            { "Page": "Page 3", "URL": "https://example.com/mathematics_class_vi_2?page=3" }
+          ],
           "Year": "2023",
           "Marks": 85,
           "Exam": "1st Summative"
         },
         {
           "School Name": "Example School VI",
-          "Link": "https://example.com/science_class_vi_2",
+          "Link": [
+            { "Page": "Page 1", "URL": "https://example.com/mathematics_class_vi_2?page=1" },
+            { "Page": "Page 2", "URL": "https://example.com/mathematics_class_vi_2?page=2" },
+            { "Page": "Page 3", "URL": "https://example.com/mathematics_class_vi_2?page=3" }
+          ],
           "Year": "2022",
           "Marks": 80,
           "Exam": "2nd Summative"
@@ -135,14 +151,22 @@
       "Mathematics": [
         {
           "School Name": "Example School VII",
-          "Link": "https://example.com/mathematics_class_vii_1",
+          "Link": [
+            { "Page": "Page 1", "URL": "https://example.com/mathematics_class_vi_2?page=1" },
+            { "Page": "Page 2", "URL": "https://example.com/mathematics_class_vi_2?page=2" },
+            { "Page": "Page 3", "URL": "https://example.com/mathematics_class_vi_2?page=3" }
+          ],
           "Year": "2023",
           "Marks": 92,
           "Exam": "3rd Summative"
         },
         {
           "School Name": "Example School VII",
-          "Link": "https://example.com/mathematics_class_vii_2",
+          "Link": [
+            { "Page": "Page 1", "URL": "https://example.com/mathematics_class_vi_2?page=1" },
+            { "Page": "Page 2", "URL": "https://example.com/mathematics_class_vi_2?page=2" },
+            { "Page": "Page 3", "URL": "https://example.com/mathematics_class_vi_2?page=3" }
+          ],
           "Year": "2022",
           "Marks": 88,
           "Exam": "1st Summative"
@@ -150,15 +174,23 @@
       ],
       "Science": [
         {
-          "School Name": "Example School VII",
-          "Link": "https://example.com/science_class_vii_1",
-          "Year": "2023",
-          "Marks": 88,
-          "Exam": "1st Summative"
+          "School Name": "Example School VI",
+          "Link": [
+            { "Page": "Page 1", "URL": "https://example.com/mathematics_class_vi_2?page=1" },
+            { "Page": "Page 2", "URL": "https://example.com/mathematics_class_vi_2?page=2" },
+            { "Page": "Page 3", "URL": "https://example.com/mathematics_class_vi_2?page=3" }
+          ],
+          "Year": "2022",
+          "Marks": 85,
+          "Exam": "2nd Summative"
         },
         {
           "School Name": "Example School VII",
-          "Link": "https://example.com/science_class_vii_2",
+          "Link": [
+            { "Page": "Page 1", "URL": "https://example.com/mathematics_class_vi_2?page=1" },
+            { "Page": "Page 2", "URL": "https://example.com/mathematics_class_vi_2?page=2" },
+            { "Page": "Page 3", "URL": "https://example.com/mathematics_class_vi_2?page=3" }
+          ],
           "Year": "2022",
           "Marks": 82,
           "Exam": "2nd Summative"
