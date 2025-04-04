@@ -71,8 +71,8 @@
                             "Chapter 1": {
                                 "name": "Numbers",
                                 "mock_tests": [
-                                    { "sheet_name": "V-pori-ch1", "test_name": "Basic Numbers Test", "num_questions": 10 },
-                                    { "sheet_name": "V-pori-ch1", "test_name": "Advanced Numbers Test", "num_questions": 15 }
+                                    { "sheet_name": "V-pori-ch1", "test_name": "V-pori-ch1 ok", "num_questions": 10 },
+                                    { "sheet_name": "V-pori-ch2", "test_name": "V-pori-ch2 ok", "num_questions": 15 }
                                 ]
                             },
                             "Chapter 2": {
