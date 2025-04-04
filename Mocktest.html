@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Quiz from Google Sheets</title>
+    <!-- Font Awesome CDN for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+       <style>
+         
+         /*css varible*/
+         :root {
+    --questionfont: 1.4rem;
+    --optionfont: 1.2rem;
+    --buttonfont: 1rem;
+   --scorefont: 1rem;
+   --explainfont: 1.2rem;
+   --rulesFontsize: 1.2rem;
+   --rulescolor:#ff00d2;
+   --bigPercfont: 4.5rem;
+}
+         
+         
+        body { font-family: Arial, sans-serif; }
+        .hidden { display: none !important }
+      /* General Reset and Box Model */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+         h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+}
+/* Container Styling */
+#dropdownContainer, div#quizContainer {
+ /*max-width: 800px; */
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f7fc;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 15px;
+}
+      #dropdownContainer{
+        display: flex;
+         margin-top: 35px;}
+      
+label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+select {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background-color: #fff;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+select:focus {
+    border-color: #6c63ff;
+    outline: none;
+    box-shadow: 0 0 8px rgba(108, 99, 255, 0.2);
+}
+
+button {
+    padding: 10px 20px;
+    font-size: var(--buttonfont);
+    background-color: #6c63ff;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 250px;
+    margin-top: 15px;
+  justify-content: space-around;
+}
+
+button:hover {
+    background-color: #2196F3;
+    transform: translateY(-3px);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    #dropdownContainer {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    select, button {
+        width: 100%;
+    }
+
+    button {
+        max-width: 50%;
+    }
+}     
+        .correct { background-color: #4CAF50; }
+        .my-options.correct::after{color:#fff;content:'\2713';font-weight:700;position: relative;right: -30px;font-size:25px}
+         .my-options.incorrect::after{color:#fff;content:'\2716';font-weight:700;position: relative;right: -30px;font-size:25px}
+         
+        .incorrect { background-color: #ff3333; }
+/* Centering the Button */
+#dropdownContainer .button-containerNew {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+    /*extra css*/ 
+/* Quiz Container */
+#quizContainer {
+    text-align: center;
+  /*  display: flex; */
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Question Styling */
+#questionText {
+    font-size: var(--questionfont);
+    font-weight: bold;
+    color: red;
+    margin: 15px 0 ;
+}
+
+/* Options Container (2x2 Grid Layout) */
+#optionsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Option Button Styling */
+#optionsContainer button {
+    padding: 15px;
+    font-size: 16px; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#optionsContainer button:hover {
+    background-color: #5749f0;
+    transform: translateY(-3px);
+}
+
+#optionsContainer button:active {
+    transform: translateY(1px);
+}
+
+/* Explanation Text */
+#explanationText {
+    font-size: var(--explainfont);
+    color: #555;
+    margin-top: 20px;
+     /* Initially hidden */
+  float: left; /* টেক্সট বাঁদিকে থাকবে */
+}
+
+/* Next Question Button Styling */
+#quizContainer .next-button {
+    padding: 12px 25px;
+    font-size: 16px;
+    background-color: #ff6347;  /* Changed button color (Tomato) */
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: auto;
+    margin-top: 20px;
+    align-self: center;  /* Centering the button */
+}
+
+#quizContainer .next-button:hover {
+    background-color: #e5533f;  /* Darker shade on hover */
+    transform: translateY(-3px);
+}
+
+#quizContainer .next-button:active {
+    transform: translateY(1px);
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    #optionsContainer {
+        grid-template-columns: 1fr;  /* Stack options in a single column */
+    }
+
+    #optionsContainer button {
+        width: 100%;  /* Make the option buttons full width */
+    }
+
+    #questionText {
+        font-size: 20px;  /* Slightly smaller font size for mobile */
+    }
+
+    #quizContainer {
+        padding: 15px;  /* Reduce padding for smaller screens */
+    }
+
+    /* Next Question Button (on small screens) */
+    #quizContainer .next-button {
+        width: 100%;  /* Full width on small screens */
+        max-width: 300px;  /* Limit the max-width */
+        margin-top: 20px;
+    }
+}
+
+/*other extra part*/
+   /* Dropdown Button Styling */
+    button#toggleButton {
+    margin: 0;
+    width: auto;
+    border-radius: 5px;
+    padding: 0 10px;
+    font-size: 16px;
+    background-color: #6c63ff;
+    color: white;
+    border: none;
+    /* border-radius: 30px; */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* margin-top: 20px; */
+}
+#toggleButton:hover {
+    background-color: #2196F3;
+    transform: translateY(-3px);
+}
+
+#toggleButton:active {
+    transform: translateY(1px);
+}
+
+/* Smooth Hide/Show Dropdown Container */
+#dropdownContainer {
+    height: auto;
+    transition: height 0.5s ease-in-out, visibility 0s linear 0.5s;  /* Added transition on visibility */
+    overflow: hidden;
+}
+
+/* Hidden Dropdown */
+#dropdownContainer.hidden {
+    height: 0;
+    display: none;
+}
+/* Parent Container for Centering the Button */
+#buttonContainer {
+    display: flex;               /* Use Flexbox */
+    justify-content: center;     /* Center horizontally */
+    align-items: center;         /* Center vertically */
+    width: 100%;                 /* Full width of the page or container */
+    position: relative;          /* Ensures flexbox works within this container */
+}
+         
+  .button-container {
+    margin: 25px;
+    font-size: var(--buttonfont);
+    height: 100vh;
+    display: flex
+;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+         .rules-container {
+    font-size: var(--rulesFontsize);
+}
+
+/* Optional: Icon transition when menu is shown */
+#toggleButton i {
+    transition: transform 0.3s ease;
+}  
+/*More more extra css*/ 
+  .my-options {
+        font-weight: bold;
+    padding: 12px 25px;
+    font-size:var(--optionfont);;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    /* max-width: 200px; */
+    margin-top: 15px;
+    border: 1px solid #ccc;
+}
+button#nextquestionbutton, button#shownowbtn {
+    max-width: fit-content;
+}
+      /* Checkbox css */
+      #modeToggleContainer {
+    display: flex;
+    position: fixed;
+    margin: 5px 10px;
+    bottom: 0;
+    text-align: center;
+}
+
+#modeToggle {
+    margin-right: 5px;
+    transform: scale(1.2); /* Optional: makes the checkbox slightly larger */
+}
+
+#modeLabel {
+  margin: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #333;
+}
+         
+#audioToggleContainer {
+    position: fixed; /* Fixed অবস্থান */
+    bottom: 20px; /* নিচ থেকে ২০ পিক্সেল */
+    left: 20px; /* ডান থেকে ২০ পিক্সেল */
+    display: flex; /* ফ্লেক্সবক্স ব্যবহার */
+    align-items: center; /* চেকবক্স এবং লেবেলকে সেন্টার অ্যালাইন করা */
+    gap: 10px; /* চেকবক্স এবং লেবেলের মধ্যে ফাঁকা */
+    background-color: #f4f4f4; /* ব্যাকগ্রাউন্ড রঙ */
+    padding: 5px 8px; /* ভেতরের প্যাডিং */
+    border-radius: 20px; /* গোলাকার কোণ */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* শেডো যোগ */
+    z-index: 1000; /* সব কন্টেন্টের উপরে থাকবে */
+}
+
+/* চেকবক্স সুইচ স্টাইল */
+#audioToggle {
+    position: relative;
+    width: 45px;
+    height: 20px;
+    appearance: none;
+    background-color: #ccc;
+    border-radius: 50px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s ease-in-out;
+}
+#audioToggle:checked {
+    background-color: #4caf50; /* অন অবস্থায় রঙ */
+}
+
+/* সুইচের গোলাকার নকশা */
+#audioToggle::before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 20px;
+    height: 20px;
+    background-color: #E91E63;
+    border-radius: 50%;
+    transition: transform 0.3s ease-in-out;
+}
+         
+#audioToggle:checked::before {
+    transform: translateX(25px); /* অন অবস্থায় বলের স্থানান্তর */
+}
+div#scoreContainer {
+    display: flex;
+    justify-content: space-around;
+  font-weight: bold;
+    font-size: var(--scorefont);
+}
+ button#displayScore {
+    background-color: #ec00ff;
+}
+div#totalQues, div#scoreTest {
+   border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+div#outerContainerQuiz {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: space-around;
+}
+         
+         hr {
+     // width: 80%; /* Adjust the width of the horizontal rule */
+      border: none;
+      height: 3px; /* Thickness of the line */
+      background: linear-gradient(45deg, #4a90e2, #50e3c2);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 0 -4px 6px rgba(0, 0, 0, 0.1);
+      margin: 20px 0;
+      border-radius: 5px; /* Rounded corners for a smoother look */
+      position: relative;
+    }
+
+    hr::before {
+      content: '';
+      position: absolute;
+      top: -3px; /* To give it a shadow effect above */
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.1); /* Light shadow on top */
+      border-radius: 5px;
+    }
+
+    hr::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; /* To give it a shadow effect below */
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.2); /* Darker shadow at the bottom */
+      border-radius: 5px;
+    }
+  .hdrules {color: var(--rulescolor)}
+         
+         
+      /*li design*/
+         ul {
+      list-style-type: none; /* Remove default list bullets */
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      background-color: #fff;
+      color: #333;
+      padding: 10px 20px;
+      margin: 8px 0;
+      border-radius: 5px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      font-size: var(--rulesFontsize);
+      transition: background-color 0.3s, box-shadow 0.3s ease;
+    }
+
+    li:hover {
+      background-color: #f0f0f0;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+         
+         div.noClickable{
+      pointer-events: none;
+         }
+         
+         
+         /*score style start*/
+         
+         .scoreCard{background:linear-gradient(to right,#9cfeff,#fcffc3);color:#fff;background-color:#fff;width:90%;max-width:900px;height:auto;padding:50px;border:12px solid #f3afff;border-radius:20px;box-shadow:0 0 20px rgba(0,0,0,.1);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+        .scoreCard::before{content:"👑";font-size:50px;position:absolute;top:0;left:50%;transform:translateX(-50%);color:#f39c12}.mock_certificate-header{text-align:center;margin-bottom:30px}.mock_certificate-title{font-size:3rem;color:#2c3e50;margin:0;font-weight:700}.mock_certificate-subtitle{font-size:1.4rem;color:#7f8c8d;margin-top:10px}.mock_student-details{font-size:2rem;color:#34495e;margin-top:30px;font-weight:700;text-align:center}.mock_student-name-value, .mock-ScrPerc{color:#3498db} span#scorePercentence {font-size: var(--bigPercfont);    color: #ff00e9;}.mock_details-table{width:100%;border-collapse:collapse;margin-top:20px;font-size:1.2rem}.mock_table-row{border-bottom:2px solid #ecf0f1} .mock-ScrPerc {display: flex;flex-direction: column;} .mock_table-header{padding:12px;background-color:#2c3e50;color:#fff;text-align:left}.mock_table-data{text-align:center;font-weight:700;padding:12px;background-color:#e91e63;font-size:1.1rem}.mock_footer{text-align:center;margin-top:30px;color:#7f8c8d}.mock_footer-text{margin:0;font-size:1.1rem}
+  
+  @media (max-width:768px){
+    .scoreCard{padding:25px}
+    .mock_certificate-title{font-size:2.5rem}
+    .mock_certificate-subtitle,.mock_student-details{font-size:1.5rem}
+    .mock_details-table{font-size:1.1rem}
+    .mock_table-data,.mock_table-header{padding:10px}
+  }
+  
+  @media (max-width:480px){.mock_certificate-title{font-size:2rem}.mock_certificate-subtitle,.mock_student-details{font-size:1.2rem}.mock_details-table{font-size:1rem}.mock_table-data,.mock_table-header{padding:8px}
+  }
+         
+   /*score style end */
+  /*modal style*/
+.mockModal {
+  /*display: none; */
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(0, 0, 0, 0.5); 
+  padding: 15px; 
+  box-sizing: border-box; 
+  z-index: 1000;
+ /* overflow: scroll;*/
+}
+ button#mockModalExpl {
+         
+border: none;content:'\2715';line-height:16px;font-size:16px;color:#000;background: #afafaf;position:fixed;bottom:20px;right:20px;display:flex;align-items:center;justify-content:center;width:30px;height:40px;border-radius:50%;transition:all .1s ease;z-index:30}
+         
+
+.mockModalContent {
+  background-color: white; 
+  margin: auto; 
+  padding: 20px; 
+  border-radius: 5px; 
+  position: relative; 
+  width: calc(100% - 30px); 
+  height: calc(100% - 30px); 
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+ .containScrol {
+    width: 100%;
+    height: 100%;
+    overflow: auto;        
+ -webkit-overflow-scrolling: touch; 
+   
+scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+.containScrol::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and WebKit-based browsers */
+}
+        
+         
+    .MockCloseModal {
+border: none;content:'\2715';line-height:16px;font-size:16px;color:#fff;background:red;position:fixed;bottom:20px;right:20px;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;transition:all .1s ease;z-index:30}
+
+img#explainImage {
+    max-height: 40vh;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    margin: 15px auto;
+    display: block;
+    border-radius: 8px;
+}
+
+
+         .headExpl{
+           margin-bottom: 10px;
+           font-weight: bold;
+           color: #E91E63;
+         }
+        
+    </style>
+</head>
+<body>
+    <!-- Dropdown Selection -->
+    <div id="dropdownContainer">
+        <label for="classSelect">তোমার শ্রেণী: </label>
+        <select id="classSelect" onchange="updateSubjects()">
+            <option value="">Select Class</option>
+        </select>
+
+        <label for="subjectSelect">বিষয় সিলেক্ট করো: </label>
+        <select id="subjectSelect" onchange="updateChapters()" disabled>
+            <option value="">Select Subject</option>
+        </select>
+
+        <label for="chapterSelect">অধ্যায় সিলেক্ট করো: </label>
+        <select id="chapterSelect" disabled>
+            <option value="">Select Chapter</option>
+        </select>
+
+       <div class="button-containerNew">
+        <button onclick="showRules()">মকটেস্ট খুলুন</button>
+    </div>
+    </div>
+  
+  
+  
+
+   <!-- Audio Toggle -->
+    <div id="audioToggleContainer">
+    <label for="audioToggle" id="audioLabel">🔊</label>
+    <input type="checkbox" checked id="audioToggle" />
+</div>
+  
+    
+   
+    <!-- Show Mock Test Button -->
+    <div class="button-container hidden" id="btnAndRules">
+      
+
+        <div class="rules-container">
+    <h2 class="hdrules">📝 Home task এর নিয়ম</h2>
+    <ul>
+  <li>প্রত্যেকটা উত্তর দেওয়ার জন্য আপাতত সময়ের কোনো প্রতিবন্ধকতা নেই।</li>
+  <li>প্রশ্নের উত্তরে একবার ক্লিক করার পর আর উত্তর পাল্টানো যাবে না।</li>
+  <li>সঠিক উত্তর দিলে 1 পয়েন্ট পাবে।</li>
+  <li>Next করার পর আর আগের প্রশ্নে যাওয়া যাবে না।</li>
+       <li>ℹ️ বাটনে ক্লিক করে উত্তরের এপ্লেনেশন দেখতে পারবে।</li>
+</ul>
+  </div>
+        <button id="showTestButton" onclick="askForName()">চালু করুন</button>
+    </div>
+  <div id="outerContainerQuiz" class="hidden">
+   <!-- Quiz Display -->
+    <div id="quizContainer" class="hidden">
+       <!-- আপনার স্কর HTML কোড -->
+      
+      <div id="scoreContainer"><div id="totalQues">মোট প্রশ্ন : 0</div><div id="scoreTest">Score</div></div>
+   <hr>
+        <h3 id="questionText"></h3>
+        <div id="optionsContainer"></div>
+       <!-- <p id="explanationText" class="explainTextP hidden"></p>-->
+        <button id="nextquestionbutton" class="hidden" onclick="loadNextQuestion()">Next Question</button>
+      <button id="displayScore" class="hidden" onclick="displayScore()">নিজের স্কোর দেখো</button>
+
+    </div>
+  
+     <!-- start -->
+       <div class="scoreCard hidden" id="scoreCert">
+        <div class="mock_certificate-header">
+            <h2 class="mock_certificate-title">তোমার স্কোর</h2>
+            <p class="mock_certificate-subtitle">Congratulations on completing the quiz!</p>
+        </div>
+
+        <div class="mock_student-details">
+            <div class="mock_student-name">Student Name: <span id="studFullName" class="mock_student-name-value">No Name</span></div>
+        </div>
+         
+          <div class="mock_student-details">
+            <div class="mock-ScrPerc"><span>-- : You Got :-- </span><span id="scorePercentence" class="mock_student-perc-value">0%</span></div>
+        </div>
+         
+       
+        <table class="mock_details-table">
+          <tr class="mock_table-row">
+                <th class="mock_table-header">Total Question</th>
+                <td id="totalQuestions" class="mock_table-data">0</td>
+            </tr>
+            <tr class="mock_table-row">
+                <th class="mock_table-header">Total Questions Attempted</th>
+                <td id="qAttempted" class="mock_table-data">0</td>
+            </tr>
+            <tr class="mock_table-row">
+                <th class="mock_table-header">Total Correct ✔️</th>
+                <td ID="gotYourScore" class="mock_table-data">0</td>
+            </tr>
+           
+            <tr class="mock_table-row">
+                <th class="mock_table-header">Total Incorrect ❌</th>
+                <td id="totalIncorrect"class="mock_table-data">0</td>
+            </tr>
+           <tr class="mock_table-row">
+                <th class="mock_table-header">Total Skipped</th>
+                <td id="quesSkipped" class="mock_table-data">0</td>
+            </tr>
+        </table>
+
+        <div class="mock_footer">
+            <p class="mock_footer-text">Thank you for participating!</p>
+        </div>
+    </div>
+      <!-- end -->
+    
+  </div>
+   
+
+   <!-- Audio Elements -->
+    <audio id="correctSound" src="https://github.com/aslamkd/abvrp-icon/raw/refs/heads/main/quizzo_correct_answer.aac"></audio>
+    <audio id="incorrectSound" src="https://github.com/aslamkd/abvrp-icon/raw/refs/heads/main/practice_wrong_answer.mp3"></audio>
+    <audio id="backgroundMusic" src="https://github.com/aslamkd/abvrp-icon/raw/refs/heads/main/quizzo_main_theme_start.aac" loop></audio>
+  <audio id="celebrationMusic" src="https://github.com/aslamkd/abvrp-icon/raw/refs/heads/main/quizzo_player_wins.aac"></audio>
+  <audio id="losesMusic" src="https://github.com/aslamkd/abvrp-icon/raw/refs/heads/main/quizzo_player_loses.aac"></audio>
+  
+  
+  
+  <!--- modal code start --->
+  
+  <button class="hidden" onclick="openModalMock()" id="mockModalExpl">❗</button>
+
+<div id="mockModal" class="mockModal hidden">
+  <div class="mockModalContent">
+    <button onclick="closeModalMock()"  class="MockCloseModal">&times;</button>
+    <h3 class="headExpl">উত্তরের ব্যাখ্যা</h3>
+    <div class="containScrol">
+    <img id="explainImage" src="" alt="Explain Image" class="hidden">
+    <p onclick="readText('explanationText')" style="cursor: pointer;" id="explanationText" class="explainTextP"></p>
+ </div>
+  </div>
+</div>
+  <!--- modal end --->
+    <script>
+        const API_KEY = 'AIzaSyDJLCOz0C0Fgw35xXzpqGr5Ugv0l7qL5dk';  // Replace with your actual Google Sheets API key
+        const SPREADSHEET_ID = '1w4Gk2nd6RHKvyW6_C820rMsoAkQRMnwcs-RVQDzMXqw';
+        const MOCK_LIST_SHEET = 'MockList';
+       
+        let data = {};
+        let mockData = [];
+        let currentQuestionIndex = 0;
+        let gotScore = 0;
+        let qAttemted = 0;
+   
+      // Function that will ask for the student name and check if it's valid
+      // Function to get a cookie by name
+function getCookie(name) {
+    let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return match ? match[2] : null;
+}
+
+// Function to set a cookie
+function setCookie(name, value, days) {
+    let date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000)); // Set expiration date
+    document.cookie = name + "=" + value + "; expires=" + date.toUTCString() + "; path=/";
+}
+
+// Main function to ask for name and handle mock test
+function askForName() {
+    // Retrieve the saved name from cookies (if available)
+    let savedName = getCookie('studentName');
+    
+    // Ask for the name with the saved name as the default value (if available)
+    let studentName = prompt("তোমার নাম লেখ / পরিবর্তন করো:", savedName || "");
+    
+    // Display the entered name (or the default name)
+    document.getElementById('studFullName').textContent = studentName;
+
+    // If a valid name is entered (non-empty string)
+    if (studentName && studentName.trim() !== "") {
+        // Save or update the name in cookies
+        setCookie('studentName', studentName, 365); // Save for 1 year
+        
+        // Call loadMockTest() if name is valid
+        loadMockTest();
+    } else {
+        // If name is blank, display a message
+        alert("মকটেস্ট শুরু করতে তোমাকে অবশ্যই তোমার নাম লিখতে হবে।");
+    }
+}
+
+// Assuming loadMockTest() is defined elsewhere
+function loadMockTest() {
+    console.log("Mock test started");
+}
+        
+      
+        window.onload = function() {
+            // You can call fetchMockTest here if you want to load it immediately
+            // Or wait for the "Show Mock Test" button click
+           fetchMockList();
+        };
+      
+      
+      // Audio Elements
+        const correctSound = document.getElementById('correctSound');
+        const incorrectSound = document.getElementById('incorrectSound');
+        const backgroundMusic = document.getElementById('backgroundMusic');
+      const celebrationMusic = document.getElementById('celebrationMusic');
+        const audioToggle = document.getElementById('audioToggle');
+
+audioToggle.addEventListener('change', () => {
+    const audioLabel = document.getElementById("audioLabel"); // লেবেলটি খুঁজে বের করুন
+    if (audioToggle.checked) {
+        backgroundMusic.play(); // সাউন্ড চালু
+        audioLabel.textContent = "🔊"; // সাউন্ড চালুর আইকন
+    } else {
+        backgroundMusic.pause(); // সাউন্ড বন্ধ
+        audioLabel.textContent = "🔇"; // সাউন্ড বন্ধের আইকন
+    }
+});
+        
+      
+      
+      
+        async function fetchMockList() {
+            const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${MOCK_LIST_SHEET}?key=${API_KEY}`);
+          
+            const result = await response.json();
+            populateData(result.values);
+            populateClassDropdown();
+        }
+
+        function populateData(rows) {
+            rows.slice(1).forEach(row => {
+                const [cls, subject, chapter, sheetName] = row;
+                if (!data[cls]) data[cls] = {};
+                if (!data[cls][subject]) data[cls][subject] = {};
+                data[cls][subject][chapter] = sheetName;
+            });
+        }
+
+        function populateClassDropdown() {
+            const classSelect = document.getElementById('classSelect');
+            Object.keys(data).forEach(cls => {
+                const option = document.createElement('option');
+                option.value = cls;
+                option.textContent = cls;
+                classSelect.appendChild(option);
+            });
+        }
+
+        function updateSubjects() {
+            const classSelect = document.getElementById('classSelect').value;
+            const subjectSelect = document.getElementById('subjectSelect');
+            subjectSelect.innerHTML = '<option value="">Select Subject</option>';
+            document.getElementById('chapterSelect').disabled = true;
+            if (classSelect) {
+                Object.keys(data[classSelect]).forEach(subject => {
+                    const option = document.createElement('option');
+                    option.value = subject;
+                    option.textContent = subject;
+                    subjectSelect.appendChild(option);
+                });
+                subjectSelect.disabled = false;
+            }
+        }
+
+        function updateChapters() {
+            const classSelect = document.getElementById('classSelect').value;
+            const subjectSelect = document.getElementById('subjectSelect').value;
+            const chapterSelect = document.getElementById('chapterSelect');
+            chapterSelect.innerHTML = '<option value="">Select Chapter</option>';
+            if (classSelect && subjectSelect) {
+                Object.keys(data[classSelect][subjectSelect]).forEach(chapter => {
+                    const option = document.createElement('option');
+                    option.value = chapter;
+                    option.textContent = chapter;
+                    chapterSelect.appendChild(option);
+                });
+                chapterSelect.disabled = false;
+            }
+        }
+      
+      
+      
+        async function loadMockTest() {
+          const classSelect = document.getElementById('classSelect').value;
+            const subjectSelect = document.getElementById('subjectSelect').value;
+            const chapterSelect = document.getElementById('chapterSelect').value;
+            if (!classSelect || !subjectSelect || !chapterSelect) return alert('Please select all fields.');
+
+            const sheetName = data[classSelect][subjectSelect][chapterSelect];
+console.log(sheetName);
+            // Remove the dropdown UI and display the quiz UI
+          document.getElementById('outerContainerQuiz').classList.remove('hidden');
+          document.querySelector('#btnAndRules').classList.add('hidden');
+            document.getElementById('showTestButton').classList.add('hidden');
+            document.getElementById('quizContainer').classList.remove('hidden');
+            document.getElementById('nextquestionbutton').classList.remove('hidden');
+
+            // Fetch the mock test data directly from the Google Sheets API
+            const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${sheetName}?key=${API_KEY}`);
+            const result = await response.json();
+          document.getElementById('dropdownContainer').classList.add('hidden');
+            mockData = result.values.slice(1);  // Assuming the first row is the header
+            currentQuestionIndex = 0;
+
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+         
+          document.getElementById('scoreTest').textContent = 'Score: ' + gotScore + '/'+ mockData.length;
+          document.getElementById('totalQues').textContent = 'মোট প্রশ্ন : ' + mockData.length;
+          
+ if (currentQuestionIndex == mockData.length-1) {
+ document.getElementById('nextquestionbutton').classList.add('hidden');
+ document.getElementById('displayScore').classList.remove('hidden');
+ }
+          
+          if (audioToggle.checked) {
+                backgroundMusic.play();
+            } 
+            if (currentQuestionIndex >= mockData.length) {
+                alert('End of quiz!');
+                return;
+            }
+
+            const [question, opt1, opt2, opt3, opt4, answer, explanation, imgLink] = mockData[currentQuestionIndex];
+            document.getElementById('questionText').textContent = (currentQuestionIndex+1) + '. ' + question;
+
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+          
+          [opt1, opt2, opt3, opt4].forEach((opt, index) => {
+    if (opt.trim() !== "") {  // Only create the div if opt is not blank
+        const btn = document.createElement('div');
+        btn.textContent = opt;
+        btn.classList.add('my-options');
+    btn.id = 'optID_' + (index + 1); // Adds IDs like 'optID_1', 'optID_2', etc.
+        btn.onclick = () => checkAnswer(index + 1, answer, explanation, imgLink);
+        optionsContainer.appendChild(btn);
+    }
+});
+            //document.getElementById('explanationText').classList.add('hidden');
+            document.getElementById('explanationText').innerHTML = explanation;
+        }
+      
+   
+
+        function checkAnswer(selected, correctAnswer, explanation, imgLink) {
+            const optionsContainer = document.getElementById('optionsContainer').children;
+            Array.from(optionsContainer).forEach((btn, index) => {
+                btn.classList.remove('correct', 'incorrect');
+                if (index + 1 == correctAnswer) 
+                  btn.classList.add('correct');
+           
+                if (index + 1 == selected && index + 1 != correctAnswer) 
+                btn.classList.add('incorrect');
+            });
+        // change attemted number
+      qAttemted++;    
+     document.querySelectorAll('.my-options').forEach(function(element) {
+    element.classList.add('noClickable');
+});
+          
+            // সাউন্ড প্লে করার জন্য শর্ত
+    if (selected == correctAnswer) {
+        correctSound.play(); // সঠিক সাউন্ড প্লে
+      gotScore++; //সেলিব্রেশন ওভারলে
+    } 
+          else if (selected !== correctAnswer){
+        incorrectSound.play(); // ভুল সাউন্ড প্লে
+ 
+     // document.getElementById('explanationText').classList.remove('hidden');
+    }
+        
+          
+  if (explanation || imgLink){
+     // alert(explanation);
+          document.getElementById('mockModalExpl').classList.remove('hidden'); 
+     } else {
+       document.getElementById('mockModalExpl').classList.add('hidden'); 
+     }
+      if (imgLink) {
+      //      alert(imgLink);
+     document.getElementById('explainImage').src = imgLink; 
+   document.getElementById('explainImage').classList.remove('hidden');  
+      }  else {
+  document.getElementById('explainImage').classList.add('hidden');     document.getElementById('explainImage').src = ''; 
+      }
+          
+    //update score
+   document.getElementById('scoreTest').textContent = 'Score: ' + gotScore + '/'+ mockData.length;       
+ //end         
+ // Explanation টেক্সট দেখানো
+   
+           // document.getElementById('explanationText').classList.remove('hidden');
+            document.getElementById('explanationText').innerHTML = explanation;
+        }
+
+        function loadNextQuestion() {
+  document.getElementById('mockModalExpl').classList.add('hidden'); 
+            currentQuestionIndex++;
+            displayQuestion();
+        }
+
+function displayScore() {
+  backgroundMusic.pause();
+  if ((gotScore / mockData.length) * 100 >= 50) {
+   celebrationMusic.play();
+  } else {
+  losesMusic.play();
+  }
+  
+  document.getElementById('totalQuestions').textContent = mockData.length;
+  document.getElementById('scorePercentence').textContent = parseFloat((gotScore / mockData.length) * 100).toFixed(2) + '%';
+  document.getElementById('quizContainer').classList.add('hidden');
+  document.getElementById('scoreCert').classList.remove('hidden');
+  document.getElementById('qAttempted').textContent = qAttemted;
+  document.getElementById('gotYourScore').textContent = gotScore;
+  document.getElementById('quesSkipped').textContent = mockData.length - qAttemted;
+  document.getElementById('totalIncorrect').textContent = qAttemted - gotScore;
+        }
+      
+      
+      
+function showRules() {
+  
+  const classSelect = document.getElementById('classSelect').value;
+
+            const subjectSelect = document.getElementById('subjectSelect').value;
+
+            const chapterSelect = document.getElementById('chapterSelect').value;
+  
+  if (!classSelect || !subjectSelect || !chapterSelect) {alert("আগে ড্রপডাউন থেকে মকটেস্ট সিলেক্ট করুন!");} else {
+  
+  document.getElementById('dropdownContainer').classList.add('hidden'); 
+    document.getElementById('btnAndRules').classList.remove('hidden');}
+  
+  
+}
+    </script>
+  <script>
+    function openModalMock () {
+  //document.getElementById('mockModal').style.display = 'block';
+      document.getElementById('mockModal').classList.remove('hidden'); 
+}
+
+function closeModalMock () {
+  
+//document.getElementById('mockModal').style.display = 'none';
+  document.getElementById('mockModal').classList.add('hidden'); 
+  stopReading();
+}
+    
+    
+    function readText(readElementId) {
+
+            const text = document.getElementById(readElementId).innerText;
+
+            const speech = new SpeechSynthesisUtterance(text);
+
+            speech.lang = 'bn-BD'; // Bengali (Bangladesh)
+
+            window.speechSynthesis.speak(speech);
+
+        }
+    function stopReading() {
+            window.speechSynthesis.cancel();
+        }
+    </script>
+  
+</body>
+</html>
