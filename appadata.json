@@ -101,6 +101,37 @@
                         }
                     }
                 },
+                "superNotes": {
+                    "Mathematics": {
+                        "Chapters": {
+                            "Chapter 1": {
+                                "name": "Numbers",
+                                "notes": [
+                                    { "title": "Notes1 of Chapter 1 ", "link": "https://www.abvrp.com/2021/06/class-6-geography-chapter-rock-minerals.html?embed=true", "type": "post" },
+                                    { "title": "Notes2 of Chapter 1 ", "link": "https://www.abvrp.com/2021/06/class-6-geography-chapter-rock-minerals.html?embed=true", "type": "post" }
+                                ]
+                            },
+                            "Chapter 2": {
+                                "name": "Algebra",
+                                "notes": [
+                                    { "title": "Notes of Chapter 1 ", "link": "https://www.abvrp.com/2021/06/class-6-geography-chapter-rock-minerals.html?embed=true", "type": "post" },
+                                    { "title": "Notes of Chapter 1 ", "link": "https://www.abvrp.com/2021/06/class-6-geography-chapter-rock-minerals.html?embed=true", "type": "post" }
+                                ]
+                            }
+                        }
+                    },
+                    "Science": {
+                        "Chapters": {
+                            "Chapter 1": {
+                                "name": "Physics - Motion",
+                                "notes": [
+                                    { "title": "Notes of Chapter 1 ", "link": "https://www.abvrp.com/2021/06/class-6-geography-chapter-rock-minerals.html?embed=true", "type": "post" },
+                                    { "title": "Notes of Chapter 1 ", "link": "https://www.abvrp.com/2021/06/class-6-geography-chapter-rock-minerals.html?embed=true", "type": "post" }
+                                ]
+                            }
+                        }
+                    }
+                },
                 "PYQ": {
      "Mathematics": [
           {
