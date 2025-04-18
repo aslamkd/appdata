@@ -45,6 +45,14 @@
                                         { "video_id": "abc123", "video_title": "Basics of Algebra", "length": "14:20" },
                                         { "video_id": "def456", "video_title": "Algebraic Expressions", "length": "15:00" }
                                     ]
+                                },
+                                "Chapter 3": {
+                                    "name": "Algebra",
+                                    "chapterIcon": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTDRTYEE8TEiFHdFdW6bq8rCXuFOokCM7JT3yKxuC0D3YwsUwDsPLGWLx4TAimHCZd3CwGHm3GL8R-wlYTtoIQmFE5_e4movthDSKwFcE0lOHWtKDdU9i8_N9M6NGoYjxOdi2g9hzFOmc-UgiTqq4b2vzmrEO57gFMRGxPi9ls1GA3IL6COooYJ-kRVpA-/s360/questionPaper.webp",
+                                    "videos": [
+                                        { "video_id": "abc123", "video_title": "Basics of Algebra", "length": "14:20" },
+                                        { "video_id": "def456", "video_title": "Algebraic Expressions", "length": "15:00" }
+                                    ]
                                 }
                             }
                         },
