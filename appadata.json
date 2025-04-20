@@ -10,13 +10,20 @@
                     "studentClass": "VI",
                     "mobile_number": "9876543210",
                     "profile_image": "https://i.ibb.co/93r4mGXm/A-20250405-174506-0000.png"
-                },
+                } ,
                 "9593636719": {
                     "name": "Airin Sultana",
                     "studentClass": "VI",
                     "password": "Airin123",
                     "mobile_number": "9593636719",
                     "profile_image": "https://i.ibb.co/93r4mGXm/A-20250405-174506-0000.png"
+                },
+                "8348595756": {
+                    "name": "Asip Mondal",
+                    "studentClass": "VI",
+                    "password": "Sohan123",
+                    "mobile_number": "8348595756",
+                    "profile_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScIve5Z0dvCvC-_nELtpM9TFNjPKAyEtk3Mqme16eeommxyPki8I7fwc0&s=10"
                 }
             }
         },
