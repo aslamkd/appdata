@@ -415,14 +415,14 @@
                                     "chapterIcon": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgUFwb8LjqkXG3sxnG56rE_TpNh6Y0SiM1wVqhfPr0y_LkwvZSb2CabkjB05FVWtzfklAKqBHkIe5wNk1lqI8b6F9wuotvGtXrCbb-4QLCgbG8fFDt8TF6qJRadcV53I5u_e7opgqyQ0a2jjor6fxG6OXBLWBXNAzTtQDBJY0t98fjM40v-b1ftS6A7Ji3L/s200/math-chapter8.webp",
                                 "mock_tests": [
                                     {
-                                        "sheet_name": "V-pori-ch1",
-                                        "test_name": "V-pori-ch1 ok",
+                                        "sheet_name": "Vii-math-ch8-p1",
+                                        "test_name": "ত্রিভুজ অংকন : ত্রিভুজের সাধারণ ধারণা [১]",
                                         "num_questions": 10
                                     },
                                     {
-                                        "sheet_name": "V-pori-ch2",
-                                        "test_name": "V-pori-ch2 ok",
-                                        "num_questions": 15
+                                        "sheet_name": "Vii-math-ch8-p2",
+                                        "test_name": "ত্রিভুজ অংকন : ত্রিভুজের সাধারণ ধারণ [2]",
+                                        "num_questions": 10
                                     }
                                 ]
                             },
