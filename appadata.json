@@ -1536,9 +1536,19 @@
             "title": "Live Science Class - Physics",
             "subject": "Mathematics",
             "chapterName": "Numbers",
-            "uptime": "2:00 PM",
+            "uptime": "11:00 PM",
             "link": "https://example.com/live_class_science_vi"
         }
+    ],
+"2025-04-26": [
+        {
+            "title": "Live Mathematics Class - Algebra",
+            "subject": "Mathematics",
+            "chapterName": "Numbers",
+            "uptime": "3:30 PM",
+            "link": "https://example.com/live_class_math_vi"
+        }
+       
     ],
     "2025-04-22": [
         {
