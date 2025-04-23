@@ -5,7 +5,7 @@
                 "9679049001": {
                     "name": "Admin",
                     "membertType": "Admin",
-                    "password": "ASLAM007",
+                    "password": "1992",
                     "gender": "Male",
                     "studentClass": "VI",
                     "mobile_number": "9679049001",
@@ -16,7 +16,7 @@
                     "membertType": "Admin",
                     "gender": "Male",
                     "studentClass": "VI",
-                    "password": "Sohan123",
+                    "password": "8156",
                     "mobile_number": "8348595756",
                     "profile_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScIve5Z0dvCvC-_nELtpM9TFNjPKAyEtk3Mqme16eeommxyPki8I7fwc0&s=10"
                 },
@@ -25,7 +25,7 @@
                     "membertType": "Student",
                     "gender": "Female",
                     "studentClass": "VI",
-                    "password": "Airin123",
+                    "password": "9519",
                     "mobile_number": "9593636719",
                     "profile_image": "https://i.ibb.co/93r4mGXm/A-20250405-174506-0000.png"
                 },
