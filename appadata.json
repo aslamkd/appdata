@@ -717,15 +717,11 @@
                                     "chapterIcon": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjPerHZg4-cxkkMUfe04wtGEb7U2vGVNStAzlEAaUIBV4xDWJIZmetKQzOeWdHGuBJfjn0fufzqKFRguvarvT-wWaI2nlcJUQLpaO7dTPL8Jql9y18DXvMFNCbHQhjX9X24RdvVJ8-6wDYWgVKmlzzFXPAtK8OD2UAv1HnumZkl2msHCFuPD7W6xCJs1Q5u/s200/light-icon.webp",
                                 "mock_tests": [
                                     {
-                                        "sheet_name": "V-pori-ch1",
-                                        "test_name": "Algebra Basics Test",
-                                        "num_questions": 12
-                                    },
-                                    {
-                                        "sheet_name": "V-pori-ch1",
-                                        "test_name": "Algebra Expressions Test",
-                                        "num_questions": 18
+                                        "sheet_name": "vii-pori-ch1i-A",
+                                        "test_name": "প্রাত্যহিক জীবনে আলো সংক্রান্ত বিভিন্ন ঘটনা ও আলোর সরলর রৈখিক গতি",
+                                        "num_questions": 13
                                     }
+                                    
                                 ]
                             },
                             "Chapter 1_iii": {
