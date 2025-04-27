@@ -29,6 +29,16 @@
                     "mobile_number": "7797953986",
                     "profile_image": "https://i.ibb.co/rGRxN25N/imgdemo.webp"
                 },  
+
+                "7430941191": {
+                    "name": "Sayan",
+                    "membertType": "User",
+                    "gender": "Male",
+                    "studentClass": "VI",
+                    "password": "7430",
+                    "mobile_number": "7430941191",
+                    "profile_image": "https://i.ibb.co/rGRxN25N/imgdemo.webp"
+                },  
                 "9593636719": {
                     "name": "Airin Sultana",
                     "membertType": "Student",
