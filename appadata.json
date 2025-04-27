@@ -5,7 +5,7 @@
                 "9679049001": {
                     "name": "Admin",
                     "membertType": "Admin",
-                    "password": "1992",
+                    "password": "2025",
                     "gender": "Male",
                     "studentClass": "VI",
                     "mobile_number": "9679049001",
@@ -19,7 +19,16 @@
                     "password": "8156",
                     "mobile_number": "8348595756",
                     "profile_image": "https://i.ibb.co/rGRxN25N/imgdemo.webp"
-                },
+                },,
+                "0000000000": {
+                    "name": "Paradise Academy VII",
+                    "membertType": "User",
+                    "gender": "Na",
+                    "studentClass": "VI",
+                    "password": "1992",
+                    "mobile_number": "9679049001",
+                    "profile_image": "https://i.ibb.co/rGRxN25N/imgdemo.webp"
+                }
                 "9593636719": {
                     "name": "Airin Sultana",
                     "membertType": "Student",
