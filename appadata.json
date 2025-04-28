@@ -762,6 +762,16 @@
 {
                                         "sheet_name": "vii-pori-ch1i-RW-B",
                                         "test_name": "সত্য/মিথ্যা : প্রচ্ছায় ও উপচ্ছায়া",
+                                        "num_questions": 7    },
+
+{
+                                        "sheet_name": "vii-pori-ch1i-C",
+                                        "test_name": "মকটেস্ট : সূচিছিদ্র ক্যামেরা",
+                                        "num_questions": 7
+                                    },
+{
+                                        "sheet_name": "vii-pori-ch1i-RW-C",
+                                        "test_name": "সত্য/মিথ্যা : সূচিছিদ্র ক্যামেরা",
                                         "num_questions": 7    }
  
                                     
