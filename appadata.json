@@ -1268,7 +1268,8 @@
                             ],
                             "Year": "2023",
                             "Marks": 85,
-                            "Exam": "1st Summative"
+                            "Exam": "1st Summative",
+                            "Status": "locked"
                         },
                         {
                             "School Name": "Example School VI",
