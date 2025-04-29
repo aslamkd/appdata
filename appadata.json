@@ -1304,12 +1304,12 @@
                                 {
                                     "Page": "Page 3",
                                     "URL": "https://i.ytimg.com/vi/SMosegDZhpw/oar2.jpg"
-                                }
+                                },
+                                "Locked": "Yes"
                             ],
                             "Year": "2022",
                             "Marks": 80,
-                            "Exam": "Paradise Academy",
-                            "Locked": "Yes"
+                            "Exam": "2nd Summative",
                         }
                     ]
                 },
