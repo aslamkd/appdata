@@ -1289,27 +1289,6 @@
                             "Year": "2022",
                             "Marks": 80,
                             "Exam": "2nd Summative"
-                        },
-                        {
-                            "School Name": "Paradise Academy",
-                            "Link": [
-                                {
-                                    "Page": "Page 1",
-                                    "URL": "https://i.ytimg.com/vi/SMosegDZhpw/oar2.jpg"
-                                },
-                                {
-                                    "Page": "Page 2",
-                                    "URL": "https://storage.googleapis.com/filo-question-diagrams/5326231_JuKNdB_1732881619770429850_image_crop_8bfbe10d-19fb-4257-83d0-618d884534e01055743066012087302.jpg"
-                                },
-                                {
-                                    "Page": "Page 3",
-                                    "URL": "https://i.ytimg.com/vi/SMosegDZhpw/oar2.jpg"
-                                },
-                                "Locked": "Yes"
-                            ],
-                            "Year": "2022",
-                            "Marks": 80,
-                            "Exam": "2nd Summative",
                         }
                     ]
                 },
@@ -1354,4 +1333,3 @@
         "Config": {}
     }
 }
-
