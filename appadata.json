@@ -1308,7 +1308,8 @@
                             ],
                             "Year": "2022",
                             "Marks": 80,
-                            "Exam": "Paradise Academy"
+                            "Exam": "Paradise Academy",
+                            "Locked": "Yes"
                         }
                     ]
                 },
