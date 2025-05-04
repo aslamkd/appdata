@@ -492,7 +492,13 @@
                                         "sheet_name": "Vii-math-ch8-p2",
                                         "test_name": "ত্রিভুজ অংকন : ত্রিভুজের সাধারণ ধারণ [2]",
                                         "num_questions": 10
+                                    },
+{
+                                        "sheet_name": "C7-Math-Ch8-tribhujAnkan",
+                                        "test_name": "ত্রিভুজ অংকন : কুইজ প্র্যাকটিস",
+                                        "num_questions": 13
                                     }
+
                                 ]
                             },
                             "Chapter 9": {
