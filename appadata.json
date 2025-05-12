@@ -798,6 +798,14 @@
 {
                                         "sheet_name": "vii-pori-ch1i-RW-C",
                                         "test_name": "সত্য/মিথ্যা : সূচিছিদ্র ক্যামেরা",
+                                        "num_questions": 7    },
+{
+                                        "sheet_name": "vii-pori-ch1i-D",
+                                        "test_name": "মকটেস্ট: আলোর প্রতিফলন",
+                                        "num_questions": 7    },
+{
+                                        "sheet_name": "vii-pori-ch1i-RW-D",
+                                        "test_name": "সত্য/মিথ্যা : আলোর প্রতিফলন",
                                         "num_questions": 7    }
  
                                     
