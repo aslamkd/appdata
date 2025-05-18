@@ -806,6 +806,14 @@
 {
                                         "sheet_name": "vii-pori-ch1i-RW-D",
                                         "test_name": "সত্য/মিথ্যা : আলোর প্রতিফলন",
+                                        "num_questions": 10    },
+{
+                                        "sheet_name": "vii-pori-ch1i-E",
+                                        "test_name": "মকটেস্ট: আলোর প্রতিসরণ",
+                                        "num_questions": 10    },
+{
+                                        "sheet_name": "vii-pori-ch1i-RW-E",
+                                        "test_name": "সত্য/মিথ্যা : আলোর প্রতিসরণ",
                                         "num_questions": 10    }
  
                                     
