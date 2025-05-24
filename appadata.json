@@ -814,6 +814,14 @@
 {
                                         "sheet_name": "vii-pori-ch1i-RW-E",
                                         "test_name": "সত্য/মিথ্যা : আলোর প্রতিসরণ",
+                                        "num_questions": 6    },
+{
+                                        "sheet_name": "vii-pori-ch1i-F",
+                                        "test_name": "সত্য/মিথ্যা : আলোর বিচ্ছুরণ ও বর্ণালী",
+                                        "num_questions": 6    },
+{
+                                        "sheet_name": "vii-pori-ch1i-RW-F",
+                                        "test_name": "সত্য/মিথ্যা : আলোর বিচ্ছুরণ ও বর্ণালী",
                                         "num_questions": 6    }
  
                                     
