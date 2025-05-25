@@ -990,20 +990,25 @@
                         }
                     },
 
-                    "Science2": {
+                    "অন্যান্য": {
                         "Chapters": {
-                            "Chapter 1.i": {
-                                "name": "ভৌত পরিবেশ (1.i) তাপ",
+                            "Class- V": {
+                                "name": "আমাদের পরিবেশ : পঞ্চম শ্রেণী",
                                     "chapterIcon": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgobuKT4UUbYEKUr0QhE4aLRJH1AtD7lZef3FBBnKeMi6kNXfaQ7FiJNpLKEjOP9JgH5IF2c2zylnbKb9uAJgIGXEi5LAq22I6yVKTBP8oyO7UQshMLjzGhd3hiZdUXRXc_zOX_z4gJI2PLffzBcoj5rTWE8XpB_gqsSaOoykWGafQsi8dLAyQxdEm9LNkJ/s200/heat-icon.webp",
                                 "mock_tests": [
                                     {
                                         "sheet_name": "V-pori-ch1",
-                                        "test_name": "Motion Test",
-                                        "num_questions": 10
+                                        "test_name": "First Summative All",
+                                        "num_questions": 93
                                     },
                                     {
-                                        "sheet_name": "V-pori-ch1",
-                                        "test_name": "Newton's Laws Test",
+                                        "sheet_name": "V-pori-ch2",
+                                        "test_name": "2nd Chapter",
+                                        "num_questions": 15
+                                    },
+                                    {
+                                        "sheet_name": "V-pori-2ndSum",
+                                        "test_name": "2nd summative",
                                         "num_questions": 15
                                     }
                                 ]
