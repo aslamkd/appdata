@@ -5,13 +5,13 @@
                 "9679049001": {
                     "name": "Admin",
                     "membertType": "Admin",
-                    "password": "1992",
+                    "password": "1992no",
                     "gender": "Male",
                     "studentClass": "VI",
                     "mobile_number": "9679049001",
                     "profile_image": "https://i.ibb.co/RpsmQy2G/admin-img.webp"
                 } ,
-                "8348595756": {
+                "8348595756no": {
                     "name": "Asip Mondal [A]",
                     "membertType": "Admin",
                     "gender": "Male",
@@ -30,7 +30,7 @@
                     "profile_image": "https://i.ibb.co/rGRxN25N/imgdemo.webp"
                 },  
 
-                "7430941191": {
+                "7430941191no": {
                     "name": "Sayan",
                     "membertType": "User",
                     "gender": "Male",
