@@ -11,13 +11,13 @@
                     "mobile_number": "9679049001",
                     "profile_image": "https://i.ibb.co/RpsmQy2G/admin-img.webp"
                 } ,
-                "8348595756no": {
-                    "name": "Asip Mondal [A]",
-                    "membertType": "Admin",
-                    "gender": "Male",
-                    "studentClass": "VI",
-                    "password": "8156",
-                    "mobile_number": "8348595756",
+                "0123456789": {
+                    "name": "Paradise Academy",
+                    "membertType": "OnlyMock",
+                    "gender": "NA",
+                    "studentClass": "VII",
+                    "password": "1234",
+                    "mobile_number": "0123456789",
                     "profile_image": "https://i.ibb.co/rGRxN25N/imgdemo.webp"
                 },
                 "7797953986": {
