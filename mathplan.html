@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON ডেটা এডিটর</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: auto;
+        }
+        h1, h2 {
+            color: #0056b3;
+        }
+        .section {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .section h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .add-item-btn {
+            background-color: #28a745;
+        }
+        .add-item-btn:hover {
+            background-color: #218838;
+        }
+        .remove-item-btn {
+            background-color: #dc3545;
+            margin-left: 10px;
+        }
+        .remove-item-btn:hover {
+            background-color: #c82333;
+        }
+        .output-json {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        #jsonOutput {
+            width: 100%;
+            height: 300px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            box-sizing: border-box;
+            background-color: #fff;
+            overflow-y: auto;
+            white-space: pre-wrap; /* Allows text to wrap */
+            word-wrap: break-word; /* Breaks long words */
+        }
+        .copy-button {
+            background-color: #6c757d;
+            margin-top: 10px;
+        }
+        .copy-button:hover {
+            background-color: #5a6268;
+        }
+        .item-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .item-row input {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>JSON ডেটা এডিটর</h1>
+
+        <div class="section" id="classSection">
+            <h2>ক্লাস (Class)</h2>
+            <div id="classContainer">
+                </div>
+            <button class="add-item-btn" onclick="addClass()">নতুন ক্লাস যোগ করুন</button>
+        </div>
+
+        <div class="section" id="unitSection">
+            <h2>ইউনিট (Unit)</h2>
+            <div id="unitContainer">
+                </div>
+            <button class="add-item-btn" onclick="addUnit()">নতুন ইউনিট যোগ করুন</button>
+        </div>
+
+        <button onclick="generateJson()">JSON তৈরি করুন</button>
+        <button class="copy-button" onclick="copyJson()">JSON কপি করুন</button>
+
+        <div class="output-json">
+            <h3>তৈরি হওয়া JSON ডেটা</h3>
+            <textarea id="jsonOutput" readonly></textarea>
+        </div>
+    </div>
+
+    <script>
+        // Initial JSON data
+        let jsonData = {
+            "MathPlan": {
+                "Class": {
+                    "পঞ্চম শ্রেণী": {
+                        "অধ্যায় ১": "দুই অঙ্কের সংখ্যার যোগ",
+                        "অধ্যায় ২": "দুই অংকের সংখ্যার বিয়োগ"
+                    },
+                    "ষষ্ঠ শ্রেণী": {
+                        "অধ্যায় ১": "তিন অংকের সংখ্যার গুণ",
+                        "অধ্যায় ২": "ভগ্নাংশ পরিচিতি"
+                    },
+                    "সপ্তম শ্রেণী": {
+                        "অধ্যায় ১": "সরল রৈখিক সমীকরণ",
+                        "অধ্যায় ২": "সমান্তর ধারার ধারণা"
+                    }
+                },
+                "Unit": {
+                    "সংখ্যা ও গণনা": {
+                        "উপ-একক": [
+                            "দুই অংকের সংখ্যা",
+                            "তিন অংকের সংখ্যা",
+                            "ভগ্নাংশ"
+                        ]
+                    },
+                    "বীজগণিত": {
+                        "উপ-একক": [
+                            "চলক ও ধ্রুবক",
+                            "সরল সমীকরণ",
+                            "বহুপদী"
+                        ]
+                    },
+                    "জ্যামিতি": {
+                        "উপ-একক": [
+                            "রেখা ও কোণ",
+                            "ত্রিভুজ",
+                            "চতুর্ভুজ"
+                        ]
+                    }
+                }
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            renderInitialData();
+            generateJson(); // Generate initial JSON on page load
+        });
+
+        function renderInitialData() {
+            const classContainer = document.getElementById('classContainer');
+            for (const className in jsonData.MathPlan.Class) {
+                const classObj = jsonData.MathPlan.Class[className];
+                const classDiv = document.createElement('div');
+                classDiv.classList.add('section');
+                classDiv.setAttribute('data-class-name', className);
+                classDiv.innerHTML = `
+                    <h3><input type="text" value="${className}" onchange="updateClassName(this)">
+                    <button class="remove-item-btn" onclick="removeClass(this)">ক্লাস সরান</button></h3>
+                    <div id="chapters-${className.replace(/\s/g, '_')}"></div>
+                    <button class="add-item-btn" onclick="addChapter(this)">নতুন অধ্যায় যোগ করুন</button>
+                `;
+                classContainer.appendChild(classDiv);
+
+                const chapterContainer = document.getElementById(`chapters-${className.replace(/\s/g, '_')}`);
+                for (const chapterName in classObj) {
+                    addChapterField(chapterContainer, chapterName, classObj[chapterName]);
+                }
+            }
+
+            const unitContainer = document.getElementById('unitContainer');
+            for (const unitName in jsonData.MathPlan.Unit) {
+                const unitObj = jsonData.MathPlan.Unit[unitName];
+                const unitDiv = document.createElement('div');
+                unitDiv.classList.add('section');
+                unitDiv.setAttribute('data-unit-name', unitName);
+                unitDiv.innerHTML = `
+                    <h3><input type="text" value="${unitName}" onchange="updateUnitName(this)">
+                    <button class="remove-item-btn" onclick="removeUnit(this)">ইউনিট সরান</button></h3>
+                    <div id="subUnits-${unitName.replace(/\s/g, '_')}"></div>
+                    <button class="add-item-btn" onclick="addSubUnit(this)">নতুন উপ-একক যোগ করুন</button>
+                `;
+                unitContainer.appendChild(unitDiv);
+
+                const subUnitContainer = document.getElementById(`subUnits-${unitName.replace(/\s/g, '_')}`);
+                unitObj['উপ-একক'].forEach(subUnit => {
+                    addSubUnitField(subUnitContainer, subUnit);
+                });
+            }
+        }
+
+        function addClass() {
+            const classContainer = document.getElementById('classContainer');
+            const newClassName = `নতুন ক্লাস ${Object.keys(jsonData.MathPlan.Class).length + 1}`;
+            jsonData.MathPlan.Class[newClassName] = {};
+
+            const classDiv = document.createElement('div');
+            classDiv.classList.add('section');
+            classDiv.setAttribute('data-class-name', newClassName);
+            classDiv.innerHTML = `
+                <h3><input type="text" value="${newClassName}" onchange="updateClassName(this)">
+                <button class="remove-item-btn" onclick="removeClass(this)">ক্লাস সরান</button></h3>
+                <div id="chapters-${newClassName.replace(/\s/g, '_')}"></div>
+                <button class="add-item-btn" onclick="addChapter(this)">নতুন অধ্যায় যোগ করুন</button>
+            `;
+            classContainer.appendChild(classDiv);
+            generateJson();
+        }
+
+        function removeClass(button) {
+            const classDiv = button.closest('.section');
+            const className = classDiv.getAttribute('data-class-name');
+            delete jsonData.MathPlan.Class[className];
+            classDiv.remove();
+            generateJson();
+        }
+
+        function updateClassName(input) {
+            const oldClassName = input.closest('.section').getAttribute('data-class-name');
+            const newClassName = input.value;
+            if (oldClassName !== newClassName) {
+                jsonData.MathPlan.Class[newClassName] = jsonData.MathPlan.Class[oldClassName];
+                delete jsonData.MathPlan.Class[oldClassName];
+                input.closest('.section').setAttribute('data-class-name', newClassName);
+                input.closest('.section').querySelector(`[id^="chapters-"]`).id = `chapters-${newClassName.replace(/\s/g, '_')}`;
+                generateJson();
+            }
+        }
+
+        function addChapter(button) {
+            const classDiv = button.closest('.section');
+            const className = classDiv.getAttribute('data-class-name');
+            const chapterContainer = document.getElementById(`chapters-${className.replace(/\s/g, '_')}`);
+            const newChapterName = `নতুন অধ্যায় ${Object.keys(jsonData.MathPlan.Class[className]).length + 1}`;
+            addChapterField(chapterContainer, newChapterName, "");
+            jsonData.MathPlan.Class[className][newChapterName] = "";
+            generateJson();
+        }
+
+        function addChapterField(container, chapterName, chapterValue) {
+            const chapterDiv = document.createElement('div');
+            chapterDiv.classList.add('item-row');
+            chapterDiv.innerHTML = `
+                <input type="text" value="${chapterName}" onchange="updateChapterName(this)">
+                <input type="text" value="${chapterValue}" onchange="updateChapterValue(this)">
+                <button class="remove-item-btn" onclick="removeChapter(this)">সরান</button>
+            `;
+            container.appendChild(chapterDiv);
+        }
+
+        function updateChapterName(input) {
+            const chapterDiv = input.closest('.item-row');
+            const oldChapterName = input.value; // Temporarily holds the old name
+            const newChapterName = input.value;
+            const chapterValue = chapterDiv.querySelector('input[type="text"]:nth-child(2)').value;
+
+            const classDiv = input.closest('.section');
+            const className = classDiv.getAttribute('data-class-name');
+
+            // Find the actual old key based on its value in the current JSON
+            let actualOldChapterName = null;
+            for (const key in jsonData.MathPlan.Class[className]) {
+                if (jsonData.MathPlan.Class[className][key] === chapterValue && key !== newChapterName) {
+                    actualOldChapterName = key;
+                    break;
+                }
+            }
+
+            if (actualOldChapterName && actualOldChapterName !== newChapterName) {
+                jsonData.MathPlan.Class[className][newChapterName] = jsonData.MathPlan.Class[className][actualOldChapterName];
+                delete jsonData.MathPlan.Class[className][actualOldChapterName];
+            } else if (!actualOldChapterName && !jsonData.MathPlan.Class[className].hasOwnProperty(newChapterName)) {
+                 // If it's a brand new entry and the old name wasn't found, just add it.
+                 // This scenario might happen if the user adds a new chapter and directly changes its name.
+                 jsonData.MathPlan.Class[className][newChapterName] = chapterValue;
+            }
+            generateJson();
+        }
+
+        function updateChapterValue(input) {
+            const chapterDiv = input.closest('.item-row');
+            const chapterName = chapterDiv.querySelector('input[type="text"]:nth-child(1)').value;
+            const chapterValue = input.value;
+
+            const classDiv = input.closest('.section');
+            const className = classDiv.getAttribute('data-class-name');
+
+            jsonData.MathPlan.Class[className][chapterName] = chapterValue;
+            generateJson();
+        }
+
+        function removeChapter(button) {
+            const chapterDiv = button.closest('.item-row');
+            const chapterName = chapterDiv.querySelector('input[type="text"]:nth-child(1)').value;
+            const classDiv = button.closest('.section');
+            const className = classDiv.getAttribute('data-class-name');
+            delete jsonData.MathPlan.Class[className][chapterName];
+            chapterDiv.remove();
+            generateJson();
+        }
+
+        function addUnit() {
+            const unitContainer = document.getElementById('unitContainer');
+            const newUnitName = `নতুন ইউনিট ${Object.keys(jsonData.MathPlan.Unit).length + 1}`;
+            jsonData.MathPlan.Unit[newUnitName] = {"উপ-একক": []};
+
+            const unitDiv = document.createElement('div');
+            unitDiv.classList.add('section');
+            unitDiv.setAttribute('data-unit-name', newUnitName);
+            unitDiv.innerHTML = `
+                <h3><input type="text" value="${newUnitName}" onchange="updateUnitName(this)">
+                <button class="remove-item-btn" onclick="removeUnit(this)">ইউনিট সরান</button></h3>
+                <div id="subUnits-${newUnitName.replace(/\s/g, '_')}"></div>
+                <button class="add-item-btn" onclick="addSubUnit(this)">নতুন উপ-একক যোগ করুন</button>
+            `;
+            unitContainer.appendChild(unitDiv);
+            generateJson();
+        }
+
+        function removeUnit(button) {
+            const unitDiv = button.closest('.section');
+            const unitName = unitDiv.getAttribute('data-unit-name');
+            delete jsonData.MathPlan.Unit[unitName];
+            unitDiv.remove();
+            generateJson();
+        }
+
+        function updateUnitName(input) {
+            const oldUnitName = input.closest('.section').getAttribute('data-unit-name');
+            const newUnitName = input.value;
+            if (oldUnitName !== newUnitName) {
+                jsonData.MathPlan.Unit[newUnitName] = jsonData.MathPlan.Unit[oldUnitName];
+                delete jsonData.MathPlan.Unit[oldUnitName];
+                input.closest('.section').setAttribute('data-unit-name', newUnitName);
+                input.closest('.section').querySelector(`[id^="subUnits-"]`).id = `subUnits-${newUnitName.replace(/\s/g, '_')}`;
+                generateJson();
+            }
+        }
+
+        function addSubUnit(button) {
+            const unitDiv = button.closest('.section');
+            const unitName = unitDiv.getAttribute('data-unit-name');
+            const subUnitContainer = document.getElementById(`subUnits-${unitName.replace(/\s/g, '_')}`);
+            const newSubUnit = `নতুন উপ-একক ${jsonData.MathPlan.Unit[unitName]["উপ-একক"].length + 1}`;
+            addSubUnitField(subUnitContainer, newSubUnit);
+            jsonData.MathPlan.Unit[unitName]["উপ-একক"].push(newSubUnit);
+            generateJson();
+        }
+
+        function addSubUnitField(container, subUnitValue) {
+            const subUnitDiv = document.createElement('div');
+            subUnitDiv.classList.add('item-row');
+            subUnitDiv.innerHTML = `
+                <input type="text" value="${subUnitValue}" onchange="updateSubUnit(this)">
+                <button class="remove-item-btn" onclick="removeSubUnit(this)">সরান</button>
+            `;
+            container.appendChild(subUnitDiv);
+        }
+
+        function updateSubUnit(input) {
+            const subUnitDiv = input.closest('.item-row');
+            const oldSubUnitValue = input.dataset.oldValue || input.value; // Store old value for finding in array
+            const newSubUnitValue = input.value;
+
+            const unitDiv = input.closest('.section');
+            const unitName = unitDiv.getAttribute('data-unit-name');
+
+            const index = jsonData.MathPlan.Unit[unitName]["উপ-একক"].indexOf(oldSubUnitValue);
+            if (index > -1) {
+                jsonData.MathPlan.Unit[unitName]["উপ-একক"][index] = newSubUnitValue;
+            } else {
+                // This handles cases where a new subunit is added and then immediately changed,
+                // or if the initial rendering didn't properly set oldValue.
+                // We'll find the current value in the JSON and replace it.
+                const currentSubUnits = jsonData.MathPlan.Unit[unitName]["উপ-একক"];
+                for (let i = 0; i < currentSubUnits.length; i++) {
+                    if (currentSubUnits[i] === oldSubUnitValue || currentSubUnits[i] === newSubUnitValue) { // Try to match by current value if old not set
+                        jsonData.MathPlan.Unit[unitName]["উপ-একক"][i] = newSubUnitValue;
+                        break;
+                    }
+                }
+            }
+            input.dataset.oldValue = newSubUnitValue; // Update old value for next change
+            generateJson();
+        }
+
+        function removeSubUnit(button) {
+            const subUnitDiv = button.closest('.item-row');
+            const subUnitValue = subUnitDiv.querySelector('input[type="text"]').value;
+            const unitDiv = button.closest('.section');
+            const unitName = unitDiv.getAttribute('data-unit-name');
+
+            const index = jsonData.MathPlan.Unit[unitName]["উপ-একক"].indexOf(subUnitValue);
+            if (index > -1) {
+                jsonData.MathPlan.Unit[unitName]["উপ-একক"].splice(index, 1);
+            }
+            subUnitDiv.remove();
+            generateJson();
+        }
+
+        function generateJson() {
+            // Reconstruct jsonData from the current state of the DOM
+            const currentJsonData = {
+                "MathPlan": {
+                    "Class": {},
+                    "Unit": {}
+                }
+            };
+
+            // Process Class section
+            document.querySelectorAll('#classContainer > .section').forEach(classDiv => {
+                const classNameInput = classDiv.querySelector('h3 input[type="text"]');
+                const className = classNameInput ? classNameInput.value : '';
+                if (className) {
+                    currentJsonData.MathPlan.Class[className] = {};
+                    classDiv.querySelectorAll('.item-row').forEach(chapterDiv => {
+                        const chapterNameInput = chapterDiv.querySelector('input[type="text"]:nth-child(1)');
+                        const chapterValueInput = chapterDiv.querySelector('input[type="text"]:nth-child(2)');
+                        if (chapterNameInput && chapterValueInput) {
+                            currentJsonData.MathPlan.Class[className][chapterNameInput.value] = chapterValueInput.value;
+                        }
+                    });
+                }
+            });
+
+            // Process Unit section
+            document.querySelectorAll('#unitContainer > .section').forEach(unitDiv => {
+                const unitNameInput = unitDiv.querySelector('h3 input[type="text"]');
+                const unitName = unitNameInput ? unitNameInput.value : '';
+                if (unitName) {
+                    currentJsonData.MathPlan.Unit[unitName] = {"উপ-একক": []};
+                    unitDiv.querySelectorAll('.item-row').forEach(subUnitDiv => {
+                        const subUnitInput = subUnitDiv.querySelector('input[type="text"]');
+                        if (subUnitInput) {
+                            currentJsonData.MathPlan.Unit[unitName]["উপ-একক"].push(subUnitInput.value);
+                        }
+                    });
+                }
+            });
+
+            jsonData = currentJsonData; // Update the global jsonData
+            document.getElementById('jsonOutput').value = JSON.stringify(jsonData, null, 2);
+        }
+
+        function copyJson() {
+            const jsonOutput = document.getElementById('jsonOutput');
+            jsonOutput.select();
+            jsonOutput.setSelectionRange(0, 99999); // For mobile devices
+            document.execCommand("copy");
+            alert("JSON ডেটা কপি করা হয়েছে!");
+        }
+    </script>
+</body>
+</html>
