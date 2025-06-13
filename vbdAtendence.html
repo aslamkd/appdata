@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Working Certificate</title>
+    <style>
+        *{box-sizing:border-box}
+        body{font-family:kalpurush,Arial,sans-serif;background-color:#f4f4f4;margin:0;padding:10px;display:flex;justify-content:center}
+        .page{background:#fff;width:100%;max-width:210mm;min-height:100vh;padding:15mm;margin:0 auto;border:1px solid #d3d3d3;box-shadow:0 0 5px rgba(0,0,0,.1)}
+        h1,h2,h3{text-align:center;margin:8px 0}
+        h1{font-size:16px;border:1px solid #000;padding:4px;margin-bottom:15px}
+        h2{font-size:15px}h3{font-size:14px}
+        .address,.subject,.body-text{font-size:14px;line-height:1.6;margin-bottom:10px}
+        .subject b{text-decoration:underline}
+        #supervisor-name-body{font-weight:700}
+        .table-container{overflow-x:auto;width:100%;-webkit-overflow-scrolling:touch}
+        table{width:100%;border-collapse:collapse;margin-top:10px;font-size:12px;min-width:650px}
+        th,td{border:1px solid #333;padding:5px;text-align:center;white-space:nowrap}
+        th{background-color:#f2f2f2}
+        .editable-number{cursor:pointer;display:inline-block;min-width:30px;padding:3px;border-radius:3px}
+        .editable-number:hover{background-color:#f0f0f0}
+        .remarks-cell{cursor:pointer;min-height:20px;color:blue;text-decoration:underline;white-space:normal}
+        .add-remark-plus{font-size:16px;font-weight:700;color:#28a745;text-decoration:none}
+        .signature{margin-top:40px;text-align:right;font-size:14px}
+        .horizontal-line{border-top:1px solid #000;margin:20px 0}
+        .attendance-block,#summary-section{display:grid;grid-template-columns:minmax(0,1fr)}
+        #summary-section h2{color:#0000ff}
+        .date-range-input{margin-bottom:8px;font-size:12px}
+        .modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,.4)}
+        .modal-content{background-color:#fefefe;margin:15% auto;padding:20px;border:1px solid #888;width:90%;max-width:350px;box-shadow:0 4px 8px 0 rgba(0,0,0,.2);border-radius:8px}
+        #calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;text-align:center}
+        #calendar div{padding:8px;border:1px solid #ddd;cursor:pointer}
+        #calendar .day-name{font-weight:700;background-color:#f0f0f0}
+        #calendar .day.selected{background-color:#007bff;color:#fff}
+        #calendar .empty{border:none;cursor:default}
+        .modal-buttons{text-align:right;margin-top:20px}
+        .modal-buttons button{padding:8px 15px;border:none;border-radius:4px;cursor:pointer}
+        .fab-container{position:fixed;bottom:20px;left:20px;z-index:999}
+        .fab-main{width:50px;height:50px;background-color:#007bff;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;box-shadow:0 4px 8px rgba(0,0,0,.3);transition:transform .2s}
+        .fab-sub-button{width:45px;height:45px;background-color:#fff;color:#007bff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.2);position:absolute;bottom:0;opacity:0;transform:scale(0) translateY(0);transition:transform .3s,opacity .3s}
+        .fab-container.open .fab-main{transform:rotate(45deg)}
+        .fab-container.open .fab-sub-button{opacity:1}
+        .fab-container.open #fab-print{transform:scale(1) translateY(-55px)}
+        .fab-container.open #fab-full-attendance{transform:scale(1) translateY(-110px)}
+        .fab-container.open #fab-change-supervisor{transform:scale(1) translateY(-165px)}
+        .fab-container.open #fab-add-table{transform:scale(1) translateY(-220px)}
+        @media (max-width: 768px){.page{padding:10mm 5mm}}
+        @media print{body{background-color:#fff;margin:0;padding:0}.page{width:210mm;height:auto;min-height:297mm;padding:15mm;border:none;box-shadow:none;margin:0}.no-print{display:none!important}table{font-size:9pt}.th,td{padding:4px}.address,.subject,.body-text,.signature{font-size:11pt;line-height:1.5}.attendance-block,#summary-section{page-break-inside:avoid!important}.remarks-cell{color:#000}}
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <h1 id="main-heading"></h1>
+        <div class="address">To<br>The BDO<br>Karimpur-I Block<br>Shikarpur, Nadia</div>
+        <div class="subject"><b>বিষয়: <span id="subject-date-range"></span> পর্যন্ত VBDCP কর্মীদের অ্যাটেনডেন্স সারসংবিট।</b></div>
+        <div class="body-text">মহাশয়,<br>&nbsp;&nbsp;&nbsp;&nbsp;আমি <span id="supervisor-name-body"></span>, করিমপুর-১ ব্লকের <span id="panchayat-name-body" style="font-weight: bold;"></span> - এর VBDCP Supervisor। আমি <span id="panchayat-name-body2" style="font-weight: bold;"></span> - এর Vector Borne Disease Control Programme (VBDCP) এর কর্মীদের <span id="subject-date-range2"></span> পর্যন্ত অ্যাটেনডেন্স এর তালিকা নিচে দিলাম।</div>
+        
+        <div id="attendance-container"></div>
+        
+        <div id="summary-section" style="display: none;">
+            <div class="horizontal-line"></div>
+            <h2>Full Attendance</h2>
+            <h3 id="summary-subheading"></h3>
+            <div id="summary-table-container" class="table-container"></div>
+        </div>
+
+        <div class="signature">
+            <span id="signature-name"></span><br>VBDCP Supervisor<br><span id="signature-panchayat"></span>
+        </div>
+    </div>
+
+    <div id="supervisor-modal" class="modal no-print"><div class="modal-content"><h3>সুপারভাইজার পরিবর্তন করুন</h3><div id="supervisor-list"></div><div class="modal-buttons"><button id="supervisor-modal-ok">Select</button><button id="supervisor-modal-cancel">Cancel</button></div></div></div>
+    <div id="remarks-modal" class="modal no-print"><div class="modal-content"><div class="modal-header"><h3>Select Dates</h3><button id="modal-prev-month">&lt;</button><span id="modal-month-year"></span><button id="modal-next-month">&gt;</button></div><div id="calendar"></div><div class="modal-buttons"><button id="modal-ok">OK</button><button id="modal-cancel">Cancel</button></div></div></div>
+
+    <div class="fab-container no-print">
+        <div class="fab-sub-button" id="fab-print" title="প্রিন্ট করুন">🖨️</div>
+        <div class="fab-sub-button" id="fab-full-attendance" title="সম্পূর্ণ রিপোর্ট দেখুন/লুকান">📊</div>
+        <div class="fab-sub-button" id="fab-change-supervisor" title="সুপারভাইজার পরিবর্তন">👤</div>
+        <div class="fab-sub-button" id="fab-add-table" title="নতুন টেবিল যোগ">📋</div>
+        <div class="fab-main" id="fab-main-btn">➕</div>
+    </div>
+
+    <script>
+        const data={"blockName":"Karimpur-I","supervisors":[{"id":1,"name":"Aslam Mondal","panchayat":"Pipulbaria Gram Panchayat","workers":[{"name":"Jewel Mondal","designation":"VST","savrp":"N"},{"name":"Provash Kumar Das","designation":"VST","savrp":"Y"},{ "name": "Abdul Gaffar Shaikh", "designation": "VST", "savrp": "N" }, { "name": "Rikta Sarkar", "designation": "VST", "savrp": "Y" }, { "name": "Uttam Biswas", "designation": "VST", "savrp": "Y" }, { "name": "Susmita Khatun", "designation": "VST", "savrp": "N" }, { "name": "Rahul Shaikh", "designation": "VST", "savrp": "Y" }, { "name": "Sariful Shaikh", "designation": "VCT", "savrp": "N" }, { "name": "Rahul Biswas", "designation": "VCT", "savrp": "N" }, { "name": "Rakesh Biswas", "designation": "VCT", "savrp": "N" }, { "name": "Sadip Mondal", "designation": "VCT", "savrp": "N" }, { "name": "Sumon Mondal", "designation": "VCT", "savrp": "Y" }, { "name": "Rubel Hasan", "designation": "VCT", "savrp": "N" }, { "name": "Izarul Shaikh", "designation": "VCT", "savrp": "N" } ] }, { "id": 2, "name": "Amit Biswas", "panchayat": "Hogalbaria Panchayat", "workers": Array.from({ length: 14 }, (_, i) => ({ name: `Hogalbaria Worker ${i + 1}`, designation: i < 8 ? "VST" : "VCT", savrp: i % 2 === 0 ? "Y" : "N" })) }, { "id": 3, "name": "Tapas Paul", "panchayat": "Nandanpur Panchayat", "workers": Array.from({ length: 14 }, (_, i) => ({ name: `Nandanpur Worker ${i + 1}`, designation: i < 8 ? "VST" : "VCT", savrp: i % 2 === 0 ? "Y" : "N" })) }, { "id": 4, "name": "Sumon Sarkar", "panchayat": "Jamsherpur Panchayat", "workers": Array.from({ length: 14 }, (_, i) => ({ name: `Jamsherpur Worker ${i + 1}`, designation: i < 8 ? "VST" : "VCT", savrp: i % 2 === 0 ? "Y" : "N" })) }, { "id": 5, "name": "Bipul Ghosh", "panchayat": "Karimpur Panchayat", "workers": Array.from({ length: 14 }, (_, i) => ({ name: `Karimpur Worker ${i + 1}`, designation: i < 8 ? "VST" : "VCT", savrp: i % 2 === 0 ? "Y" : "N" })) }, { "id": 6, "name": "Rajib Ahmed", "panchayat": "Goas Panchayat", "workers": Array.from({ length: 14 }, (_, i) => ({ name: `Goas Worker ${i + 1}`, designation: i < 8 ? "VST" : "VCT", savrp: i % 2 === 0 ? "Y" : "N" })) }, { "id": 7, "name": "Priyanka Sen", "panchayat": "Thanapara Panchayat", "workers": Array.from({ length: 14 }, (_, i) => ({ name: `Thanapara Worker ${i + 1}`, designation: i < 8 ? "VST" : "VCT", savrp: i % 2 === 0 ? "Y" : "N" })) }, { "id": 8, "name": "Goutam Das", "panchayat": "Natna Panchayat", "workers": Array.from({ length: 14 }, (_, i) => ({ name: `Natna Worker ${i + 1}`, designation: i < 8 ? "VST" : "VCT", savrp: i % 2 === 0 ? "Y" : "N" })) }] };
+        let appState={selectedSupervisorId:1,attendanceBlocks:[],showSummary:!1};
+        const DOM={attendanceContainer:document.getElementById("attendance-container"),remarksModal:document.getElementById("remarks-modal"),supervisorModal:document.getElementById("supervisor-modal"),summarySection:document.getElementById("summary-section")};
+        const saveState=()=>localStorage.setItem("attendanceAppState_v10",JSON.stringify(appState));
+        const loadState=()=>{const e=localStorage.getItem("attendanceAppState_v10");if(e){appState=JSON.parse(e);if(void 0===appState.showSummary)appState.showSummary=!1}};
+        const getDaysInPeriod=(e,t)=>e&&t?Math.ceil(Math.abs(new Date(t)-new Date(e))/864e5)+1:0;
+        const formatDate=e=>e?e.toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"}):"";
+        
+        function renderPage(){updateStaticInfo();DOM.attendanceContainer.innerHTML="";appState.attendanceBlocks.forEach(createAttendanceBlock);appState.showSummary&&renderSummary()}
+        function updateStaticInfo(){const e=data.supervisors.find(e=>e.id===appState.selectedSupervisorId);if(!e)return;const t=e.panchayat,a=e.name;let n=null,d=null;const o=appState.attendanceBlocks.filter(e=>e.startDate&&e.endDate);if(o.length>0){const e=o.flatMap(e=>[new Date(e.startDate),new Date(e.endDate)]);n=new Date(Math.min.apply(null,e)),d=new Date(Math.max.apply(null,e))}let s="for the selected period";n&&d&&(s=`from ${formatDate(n)} to ${formatDate(d)}`);document.getElementById("supervisor-name-body").textContent=a,["panchayat-name-body","panchayat-name-body2","signature-panchayat"].forEach(e=>{document.getElementById(e).textContent=t}),["subject-date-range","subject-date-range2"].forEach(e=>{document.getElementById(e).textContent=s}),document.getElementById("signature-name").textContent=a,document.getElementById("main-heading").textContent=`Working Certificate ${s}`}
+        function handleNewAttendance(){let e,t;if(appState.attendanceBlocks.length>0){const a=appState.attendanceBlocks[appState.attendanceBlocks.length-1].endDate,n=new Date(a);n.setUTCDate(n.getUTCDate()+2),e=new Date(Date.UTC(n.getUTCFullYear(),n.getUTCMonth(),1)),t=new Date(Date.UTC(n.getUTCFullYear(),n.getUTCMonth()+1,0))}else{const a=new Date;e=new Date(Date.UTC(a.getUTCFullYear(),a.getUTCMonth(),1)),t=new Date(Date.UTC(a.getUTCFullYear(),a.getUTCMonth()+1,0))}const a={id:Date.now(),startDate:e.toISOString().split("T")[0],endDate:t.toISOString().split("T")[0],attendance:{}};appState.attendanceBlocks.push(a),saveState(),renderPage()}
+        function createAttendanceBlock(e){const t=document.createElement("div");t.className="attendance-block",t.dataset.id=e.id;const a=data.supervisors.find(e=>e.id===appState.selectedSupervisorId),n=new Date(e.startDate),d=new Date(e.endDate),o=`Attendance data from ${formatDate(n)} to ${formatDate(d)}`,s=getDaysInPeriod(e.startDate,e.endDate);t.innerHTML=`<h3>${o}</h3><div class="date-range-input no-print">Start: <input type="date" class="start-date" value="${e.startDate}"> End: <input type="date" class="end-date" value="${e.endDate}"></div><div class="table-container"><table><thead><tr><th>নং</th><th>কর্মীর নাম</th><th>ডেজিগনেশন</th><th>SAVRP</th><th>মোট দিন</th><th>ছুটি</th><th>কামাই</th><th>মোট</th><th>কাজের দিন</th><th>রিমার্কস</th></tr></thead><tbody>${a.workers.map((t,a)=>{const n=e.attendance[t.name]||{leave:0,absent:0,remarks:""},d=parseInt(n.leave)+parseInt(n.absent),o=s-d;return`
+                <tr data-worker-name="${t.name}"><td>${a+1}</td><td>${t.name}</td><td>${t.designation}</td><td>${t.savrp}</td><td class="total-days">${s}</td>
+                <td class="leave-cell"><span class="editable-number" data-value="${n.leave}">${n.leave}</span></td>
+                <td class="absent-cell"><span class="editable-number" data-value="${n.absent}">${n.absent}</span></td>
+                <td class="total-leave-absent">${d}</td><td class="working-days">${o}</td>
+                <td class="remarks-cell" data-remarks="${n.remarks}">${n.remarks||'<span class="add-remark-plus no-print">+</span>'}</td></tr>`}).join("")}</tbody></table></div>`,DOM.attendanceContainer.appendChild(t),addBlockEventListeners(t,e.id,s)}
+        function addBlockEventListeners(e,t,a){const n=appState.attendanceBlocks.find(e=>e.id===t),d=e.querySelector(".start-date"),o=e.querySelector(".end-date");function s(){const e=d.value.split("-"),t=new Date(Date.UTC(e[0],e[1]-1,e[2]));o.min=t.toISOString().split("T")[0];const a=new Date(Date.UTC(t.getUTCFullYear(),t.getUTCMonth()+1,0));o.max=a.toISOString().split("T")[0];const n=o.value.split("-"),r=new Date(Date.UTC(n[0],n[1]-1,n[2]));r<t&&(o.value=d.value)}d.addEventListener("change",()=>{s(),n.startDate=d.value,n.endDate=o.value,saveState(),renderPage()}),o.addEventListener("change",()=>{n.endDate=o.value,saveState(),renderPage()}),s(),e.querySelectorAll("tbody tr").forEach(e=>{const d=e.dataset.workerName;n.attendance[d]||(n.attendance[d]={leave:0,absent:0,remarks:""});function o(t,d,o){const s=e.querySelector(t);s.addEventListener("click",t=>{if("SPAN"!==t.target.tagName)return;const l=t.target,r=document.createElement("select");for(let e=0;e<=a;e++)r.add(new Option(e,e));r.value=l.dataset.value,s.innerHTML="",s.appendChild(r),r.focus();function c(){n.attendance[d][o]=parseInt(r.value);const t=n.attendance[d],l=parseInt(t.leave)+parseInt(t.absent);e.querySelector(".total-leave-absent").textContent=l,e.querySelector(".working-days").textContent=a-l,s.innerHTML=`<span class="editable-number" data-value="${r.value}">${r.value}</span>`,saveState(),renderSummary()}r.addEventListener("change",c),r.addEventListener("blur",c)})}o(".leave-cell",d,"leave"),o(".absent-cell",d,"absent"),e.querySelector(".remarks-cell").addEventListener("click",e=>{let t;t&&t.contains(e.target)||((t=e.target.closest(".remarks-cell"))&&(currentEditingCell=t,currentEditingDate=new Date(n.startDate),DOM.remarksModal.style.display="block",renderCalendar()))})})}
+        function renderSummary(){if(appState.showSummary&&appState.attendanceBlocks.length>0){DOM.summarySection.style.display="block";const e=data.supervisors.find(e=>e.id===appState.selectedSupervisorId),t={};e.workers.forEach(e=>{t[e.name]={totalDays:0,leave:0,absent:0,remarks:[]}});const a=appState.attendanceBlocks.filter(e=>e.startDate&&e.endDate);a.forEach(a=>{const n=getDaysInPeriod(a.startDate,a.endDate);e.workers.forEach(e=>{const d=a.attendance[e.name]||{leave:0,absent:0,remarks:""};t[e.name].totalDays+=n,t[e.name].leave+=parseInt(d.leave),t[e.name].absent+=parseInt(d.absent),d.remarks&&t[e.name].remarks.push(d.remarks)})});const n=a.flatMap(e=>[new Date(e.startDate),new Date(e.endDate)]),d=new Date(Math.min.apply(null,n)),o=new Date(Math.max.apply(null,n));document.getElementById("summary-subheading").textContent=`Period: ${formatDate(d)} to ${formatDate(o)} for ${e.panchayat}`,document.getElementById("summary-table-container").innerHTML=`<table><thead><tr><th>No.</th><th>Worker</th><th>Designation</th><th>SAVRP</th><th>Total Days</th><th>Total Leave</th><th>Total Absent</th><th>Total L+A</th><th>Work Days</th><th>Remarks</th></tr></thead><tbody>${e.workers.map((e,a)=>{const n=t[e.name],d=n.leave+n.absent,o=n.totalDays-d;return`<tr><td>${a+1}</td><td>${e.name}</td><td>${e.designation}</td><td>${e.savrp}</td><td>${n.totalDays}</td><td>${n.leave}</td><td>${n.absent}</td><td>${d}</td><td>${o}</td><td style="font-size:9px;white-space:normal;">${n.remarks.join("; ")}</td></tr>`}).join("")}</tbody></table>`}else DOM.summarySection.style.display="none"}
+        let currentEditingCell=null,currentEditingDate=new Date;
+        function renderCalendar(){const e=document.getElementById("calendar");e.innerHTML="";const t=currentEditingDate.getMonth(),a=currentEditingDate.getFullYear();document.getElementById("modal-month-year").textContent=new Date(a,t).toLocaleString("en-GB",{month:"long",year:"numeric"});const n=new Date(a,t,1).getDay(),d=new Date(a,t+1,0).getDate();["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].forEach(t=>{e.innerHTML+=`<div class="day-name">${t}</div>`});for(let t=0;t<n;t++)e.innerHTML+='<div class="empty"></div>';const o=(currentEditingCell.dataset.remarks||"").replace("Day: ","").split(", ").map(Number);for(let t=1;t<=d;t++){const a=document.createElement("div");a.className="day",a.textContent=t,a.dataset.day=t,o.includes(t)&&a.classList.add("selected"),a.onclick=()=>a.classList.toggle("selected"),e.appendChild(a)}}
+        document.addEventListener("DOMContentLoaded",()=>{loadState(),renderPage(),document.getElementById("fab-main-btn").onclick=()=>document.querySelector(".fab-container").classList.toggle("open"),document.getElementById("fab-add-table").onclick=handleNewAttendance,document.getElementById("fab-change-supervisor").onclick=()=>{const e=document.getElementById("supervisor-list");e.innerHTML="",data.supervisors.forEach(t=>{const a=document.createElement("label"),n=`<input type="radio" name="supervisor" value="${t.id}" ${appState.selectedSupervisorId===t.id?"checked":""}>`;a.innerHTML=`${n} ${t.name} (${t.panchayat})`,e.appendChild(a)}),DOM.supervisorModal.style.display="block"},document.getElementById("fab-full-attendance").onclick=()=>{appState.showSummary=!appState.showSummary,saveState(),renderSummary()},document.getElementById("fab-print").onclick=()=>window.print(),document.getElementById("supervisor-modal-ok").onclick=()=>{const e=document.querySelector('input[name="supervisor"]:checked');if(e){const t=parseInt(e.value);appState.selectedSupervisorId!==t&&(appState.selectedSupervisorId=t,appState.attendanceBlocks.forEach(e=>{e.attendance={}}),saveState(),renderPage())}DOM.supervisorModal.style.display="none"},document.getElementById("supervisor-modal-cancel").onclick=()=>DOM.supervisorModal.style.display="none",document.getElementById("remarks-modal-ok").onclick=()=>{const e=Array.from(document.querySelectorAll("#calendar .day.selected")).map(e=>e.dataset.day).sort((e,t)=>e-t),t=e.length>0?`Day: ${e.join(", ")}`:"";currentEditingCell.dataset.remarks=t,currentEditingCell.innerHTML=t||'<span class="add-remark-plus no-print">+</span>',t&&(currentEditingCell.innerHTML+=' <span class="clear-remarks no-print" title="Clear">✖</span>');const a=currentEditingCell.parentElement,n=a.dataset.workerName,d=parseInt(a.closest(".attendance-block").dataset.id);appState.attendanceBlocks.find(e=>e.id===d).attendance[n].remarks=t,saveState(),DOM.remarksModal.style.display="none"},document.getElementById("remarks-modal-cancel").onclick=()=>DOM.remarksModal.style.display="none",document.getElementById("modal-prev-month").onclick=()=>{currentEditingDate.setMonth(currentEditingDate.getMonth()-1),renderCalendar()},document.getElementById("modal-next-month").onclick=()=>{currentEditingDate.setMonth(currentEditingDate.getMonth()+1),renderCalendar()}});
+    </script>
+</body>
+</html>
