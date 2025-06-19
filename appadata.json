@@ -401,7 +401,7 @@
                 "Mock Test": {
                     "Mathematics": {
                         "Chapters": {
-                            "Exam-wise All in One": {
+                            "Chapter 24": {
                                 "name": "Exam-wise All in One",
                                     "chapterIcon": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgnAuQzNCtfODDjRxdqO6G4lRx5HMPY3WXgbgV4-kLv-CeNdzKu49Mf282AgDE0wFYMJ9X1xpdS6B6HIZ1X29GFJikuOPpLQDU9nCViEfje6ZI7LvgCjjT9NvemKPc0u4gXms7ns2PfyBGbrDsUb74Q4Pz5vr3MdV1-oyylg5VeL894lVU6RcTbcLTELvPb/s200/math-chapter02.webp",
                                 "mock_tests": [
@@ -776,7 +776,18 @@
                                         "num_questions": 18
                                     }
                                 ]
-                            }   
+                            },
+                            "Chapter 24": {
+                                "name": "Exam-wise All in One",
+                                    "chapterIcon": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgnAuQzNCtfODDjRxdqO6G4lRx5HMPY3WXgbgV4-kLv-CeNdzKu49Mf282AgDE0wFYMJ9X1xpdS6B6HIZ1X29GFJikuOPpLQDU9nCViEfje6ZI7LvgCjjT9NvemKPc0u4gXms7ns2PfyBGbrDsUb74Q4Pz5vr3MdV1-oyylg5VeL894lVU6RcTbcLTELvPb/s200/math-chapter02.webp",
+                                "mock_tests": [
+                                   {
+                                        "sheet_name": "C-VII-MATH-2nd",
+                                        "test_name": "2nd Unit All in One",
+                                        "num_questions": 100
+                                    } 
+                                ]
+                            }
                         }
                     },
                     "Science": {
