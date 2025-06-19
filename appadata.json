@@ -401,6 +401,17 @@
                 "Mock Test": {
                     "Mathematics": {
                         "Chapters": {
+                            "Chapter 2": {
+                                "name": "Exam-wise All in One",
+                                    "chapterIcon": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgnAuQzNCtfODDjRxdqO6G4lRx5HMPY3WXgbgV4-kLv-CeNdzKu49Mf282AgDE0wFYMJ9X1xpdS6B6HIZ1X29GFJikuOPpLQDU9nCViEfje6ZI7LvgCjjT9NvemKPc0u4gXms7ns2PfyBGbrDsUb74Q4Pz5vr3MdV1-oyylg5VeL894lVU6RcTbcLTELvPb/s200/math-chapter02.webp",
+                                "mock_tests": [
+                                   {
+                                        "sheet_name": "C-VII-MATH-2nd",
+                                        "test_name": "2nd Unit All in One",
+                                        "num_questions": 100
+                                    } 
+                                ]
+                            },
                             "Chapter 1": {
                                 "name": "পূর্বপাঠের পুনরালোচনা",
                                     "chapterIcon": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgREMgNTccgLnEfHa4wVcfA-yIz4yxRNn4patUQiNvfCYtCatchMhHUFcYrgWfGM8P8VKfyTd2ba1ilmS7r1VBQLRFdbYfTd5vjMjzgwCQYKDfVYnqBHRxwwHZOnCE3LxiQ_2WCFT5c9dJfPYhgXAR8ccamvIo22P9a33k0vkMcGAu_uLYt8Mcj4LUkfekZ/s200/math-Chapter1.webp",
