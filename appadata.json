@@ -987,7 +987,7 @@
                                     "chapterIcon": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiUYz4taMa9dh_dtyU2dO4JqOdNxNtCNivH6oMzCiietRXPYjAIBl4q_xTXe14ayulQK34X7vhFGx2OayjGm0FsLXQq9-im31vW_Twfoz_z0UDxqHVbv4zAcX8BMHEYNhCj-pyry51opNgOxCcHN2sClCqLmVKo3wkjiqTEy_n_N13Y3vBiphIJ1KuEA9-C/s200/sc-chapter7.webp",
                                 "mock_tests": [
                                     {
-                                        "sheet_name": "V-pori-ch1",
+                                        "sheet_name": "C7-Pori-Ch8-Health",
                                         "test_name": "Algebra Basics Test",
                                         "num_questions": 12
                                     },
@@ -1003,9 +1003,9 @@
                                     "chapterIcon": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg_Uf35RvgppdxcSXx6n5QcaSc1JmGL5z3nJoc_RRd_2Haq4s_zBvoRl9dQq40FhpUwiR9BPuCz46i4pwUDQ-iBzO8p31E36ixP8u4eaXGb2RGYozPg0c1LdnBR5cWd_V9Y6dcq8OClj4SzVbiCOHrjw3385pMLkI-_mdGaJNU58w2f12UUYu7fWROpZFx9/s200/sc-chapter8.webp",
                                 "mock_tests": [
                                     {
-                                        "sheet_name": "V-pori-ch1",
-                                        "test_name": "Algebra Basics Test",
-                                        "num_questions": 12
+                                        "sheet_name": "C7-Pori-Ch8-Health",
+                                        "test_name": "পরিবেশ ও জনসাস্থ্য মক টেস্ট",
+                                        "num_questions": 17
                                     },
                                     {
                                         "sheet_name": "V-pori-ch1",
