@@ -15,7 +15,7 @@
                     "name": "Paradise Academy",
                     "membertType": "OnlyMock",
                     "gender": "NA",
-                    "studentClass": "VII",
+                    "studentClass": "VI",
                     "password": "1234",
                     "mobile_number": "0123456789",
                     "profile_image": "https://i.ibb.co/rGRxN25N/imgdemo.webp"
@@ -47,6 +47,16 @@
                     "studentClass": "VI",
                     "password": "8958",
                     "mobile_number": "8918747758",
+                    "profile_image": "https://i.ibb.co/7dpkJT3q/sayan-vii-para.webp"
+                }, 
+
+                "9564290231": {
+                    "name": "Sarmina",
+                    "membertType": "User",
+                    "gender": "Female",
+                    "studentClass": "VI",
+                    "password": "0231",
+                    "mobile_number": "9564290231",
                     "profile_image": "https://i.ibb.co/7dpkJT3q/sayan-vii-para.webp"
                 }, 
                 "9593636719": {
