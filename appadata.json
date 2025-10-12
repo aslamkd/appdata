@@ -11,6 +11,16 @@
                     "mobile_number": "9679049001",
                     "profile_image": "https://i.ibb.co/RpsmQy2G/admin-img.webp"
                 } ,
+                "9775027642": {
+                    "name": "Meherunnechha",
+                    "membertType": "OnlyMock",
+                    "gender": "Female",
+                    "studentClass": "VI",
+                    "password": "7642",
+                    "mobile_number": "9775027642",
+                    "profile_image": "https://i.ibb.co/rGRxN25N/imgdemo.webp"
+                },
+
                 "0123456789": {
                     "name": "Paradise Academy",
                     "membertType": "OnlyMock",
