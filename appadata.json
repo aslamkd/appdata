@@ -1033,13 +1033,13 @@
                                 "mock_tests": [
                                     {
                                         "sheet_name": "C7-Pori-Ch8-Health",
-                                        "test_name": "পরিবেশ ও জনসাস্থ্য মক টেস্ট",
+                                        "test_name": "পরিবেশ ও জনসাস্থ্য পার্ট ১",
                                         "num_questions": 17
                                     },
                                     {
-                                        "sheet_name": "V-pori-ch1",
-                                        "test_name": "Algebra Expressions Test",
-                                        "num_questions": 18
+                                        "sheet_name": "C7-Pori-Ch8-HealthP2",
+                                        "test_name": " পরিবেশ ও জনসাস্থ্য পার্ট ২",
+                                        "num_questions": 44
                                     }
                                 ]
                             },
